@@ -143,8 +143,7 @@ Contoh:
 
 Kesimpulan:
 QuickFake adalah konten manipulasi digital yang dibuat secara instan atau cepat, biasanya menggunakan bantuan teknologi AI atau aplikasi editing modern.</code></pre></div></div>
-            <div class="docs-section"><h3><i class="fas fa-folder-tree"></i> Base URL & Endpoint API</h3><div class="code-block"><pre><code>Base URL: https://api.siputzx.my.id/
-
+            <div class="docs-section"><h3><i class="fas fa-folder-tree"></i> Base URL & Endpoint API</h3><div class="code-block"><pre><code>
 BERITA:
 • /api/berita/cnbcindonesia
 • /api/berita/liputan6
@@ -169,12 +168,12 @@ MAKER ENDPOINTS:
 • /maker/textpro
 • /maker/photooxy</code></pre></div></div>
             <div class="docs-section"><h3><i class="fas fa-folder-tree"></i> Struktur File</h3><div class="code-block"><pre><code>QuickFake/
-├── index.html
-├── style.css
-├── script.js
-├── download.js
+├── index.html      # Halaman utama & struktur DOM
+├── style.css       # Styling modern & responsive
+├── script.js       # Logika frontend & API handler
 └── api/
-    └── generate.js</code></pre></div></div>
+    └── generate.js # Backend proxy (opsional)
+    └── download.js     # Fungsi download gambar</code></pre></div></div>
             <div class="docs-section"><h3><i class="fas fa-cogs"></i> Fungsi Utama (script.js)</h3>
                 <table class="docs-table">
                     <thead>
@@ -222,13 +221,14 @@ MAKER ENDPOINTS:
                 </div>
             </div>
             <div class="docs-section"><h3><i class="fas fa-rocket"></i> Kontribusi & Pengembangan</h3>
-                <p>QuickFake bersifat eksperimental, kolaboratif, iteratif, aksesibel, dan fleksibel, sehingga mempercepat inovasi—namun tetap harus digunakan secara bertanggung jawab:</p>
+                <div class="code-block"><pre><code>{QuickFake bersifat eksperimental, kolaboratif, iteratif, aksesibel, dan fleksibel, sehingga mempercepat inovasi—namun tetap harus digunakan secara bertanggung jawab:</p>
                 <ul style="margin: 1rem 0 0 1.5rem;">
                     <li>Menambahkan format mockup baru dengan menambahkan object di array <code>formats</code> di script.js</li>
                     <li>Mengustomisasi tampilan di file <code>style.css</code></li>
                     <li>Menambahkan fitur export ke format lain (PDF, PNG, dll)</li>
                     <li>Menambahkan fitur share langsung ke media sosial</li>
                 </ul>
+                </code></pre></div>
                 <p style="margin-top: 1rem; padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 1rem; border-left: 4px solid #ef4444;"><strong>⚠️ Disclaimer:</strong> Gunakan Website Ini secara bijaksana. Tidak untuk menipu atau pun lain. Dev - JHON PRODUCTION Tidak Bertanggung Jawab Jika Di Salah Gunakan. Website Ini Hanya untuk Edukasi. Terimakasih.</p>
             </div>
             <div class="docs-section"><h3><i class="fas fa-code-branch"></i> Format Data (formats array)</h3>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jhon_tools - DASHBOARD</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/Uploader.css">
+  </head>
+  <body>
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-box">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>jhon_tools</span>
+        </div>
+      </div>
+      <ul class="nav-menu">
+        <div class="nav-label">MENU</div>
+        <li class="nav-item">
+          <button class="nav-btn" onclick="showTool('dashboard')">
+            <i class="fa-solid fa-gauge"></i> Dashboard
+          </button>
+        </li>
+        <div class="nav-label" style="margin-top: 20px;">TO URL</div>
+        <li class="nav-item">
+          <button class="nav-btn" id="uploaderBtn" onclick="toggleUploaderDropdown()">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Uploader
+            <i class="fas fa-chevron-down arrow"></i>
+          </button>
+          <div class="dropdown-menu" id="uploaderDropdown">
+            <div class="dropdown-item">
+              <button class="dropdown-btn" onclick="showTool('img')">
+                <i class="fa-solid fa-image"></i> Img to URL
+              </button>
+            </div>
+            <div class="dropdown-item">
+              <button class="dropdown-btn" onclick="showTool('vid')">
+                <i class="fa-solid fa-video"></i> Vid to URL
+              </button>
+            </div>
+            <div class="dropdown-item">
+              <button class="dropdown-btn" onclick="showTool('aud')">
+                <i class="fa-solid fa-music"></i> Aud to URL
+              </button>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item" style="margin-top: 10px;">
+          <button class="nav-btn" onclick="showTool('settings')">
+            <i class="fa-solid fa-gear"></i> Settings
+          </button>
+        </li>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-account">
+          <div class="sidebar-profile" onclick="showTool('profile')">
+            <img class="avatar" src="https://i.ibb.co.com/chGXxvw1/avt.jpg" alt="avatar" referrerpolicy="no-referrer" />
+            <div class="sp-meta">
+              <div class="sp-name">jhon ofc</div>
+              <div class="sp-tag">Student • Web Development</div>
+            </div>
+          </div>
+          <div class="copyright">© Hak cipta dilindungi.</div>
+        </div>
+      </ul>
+    </nav>
+    <div class="main-wrapper">
+      <header class="top-bar">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <button class="mobile-toggle" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="page-title">
+            <h1>Dashboard</h1>
+            <p>Welcome to jhon_tools management panel</p>
+          </div>
+        </div>
+        <div class="profile-badge" onclick="showTool('profile')">
+          <img class="profile-avatar" src="https://i.ibb.co.com/chGXxvw1/avt.jpg" alt="Profile" referrerpolicy="no-referrer" />
+          <div class="profile-meta">
+            <div class="profile-name">jhon ofc</div>
+            <div class="profile-role">JHON PRODUCTION • Web Dev</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD SECTION -->
+      <section id="dashboardTool" class="tool-section">
+        <div class="overview-card">
+          <div class="overview-head">
+            <div class="ov-title">
+              <div class="ov-icon"><i class="fa-solid fa-gauge-high"></i></div>
+              <div style="min-width:0;">
+                <h2>Dashboard Overview</h2>
+                <p>Ringkasan singkat dan akses cepat ke fitur utama.</p>
+              </div>
+            </div>
+            <div class="clock-chip">
+              <div class="clock" id="clockText">--:--:--</div>
+              <div class="clock-sub" id="clockSub">--</div>
+            </div>
+          </div>
+          <div class="overview-body">
+            <div class="ov-panel">
+              <h3>What you can do</h3>
+              <p>Gunakan menu "Uploader" untuk mengunggah gambar, video, atau audio. Setelah berhasil, tautan URL tersedia dan dapat disalin dengan satu klik.</p>
+            </div>
+            <div class="ov-kpis">
+              <div class="kpi"><div class="k">STATUS</div><div class="v" id="kpiStatus">ONLINE</div></div>
+              <div class="kpi"><div class="k">TOTAL VISITORS</div><div class="v" id="kpiTotal">0</div></div>
+              <div class="kpi"><div class="k">ACTIVE NOW</div><div class="v" id="kpiActive">1</div></div>
+              <div class="kpi"><div class="k">UPLOADS TODAY</div><div class="v" id="kpiUploads">0</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-content">
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="card-title">Quick Actions</div></div>
+            <div class="card-body">
+              <p>Pilih tool yang ingin digunakan:</p>
+              <div class="quick-actions">
+                <button class="qa-btn primary" onclick="showTool('img')"><i class="fa-solid fa-image"></i> Img to URL</button>
+                <button class="qa-btn" onclick="showTool('vid')"><i class="fa-solid fa-video"></i> Vid to URL</button>
+                <button class="qa-btn" onclick="showTool('aud')"><i class="fa-solid fa-music"></i> Aud to URL</button>
+                <button class="qa-btn" onclick="showTool('profile')"><i class="fa-solid fa-user"></i> Profile</button>
+              </div>
+              <div class="chip-row"><div class="chip">Static Frontend</div><div class="chip">Vanilla JS</div><div class="chip">Fast Workflow</div></div>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="card-title">Join Saluran WhatsApp</div></div>
+            <div class="card-body">
+              <p>Join saluran WhatsApp kami untuk update informasi teknologi, tools web, APK, Termux, dan tools lainnya.</p>
+              <a class="link-btn whatsapp" href="https://whatsapp.com/channel/0029VbBjyjlJ93wa6hwSWa0p" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Join Channel</a>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-solid fa-users"></i></div><div class="card-title">Visitors Statistics</div></div>
+            <div class="card-body">
+              <p>Statistik pengunjung web (data disimpan di LocalStorage browser).</p>
+              <div class="chart-wrap">
+                <div class="chart-box">
+                  <div class="chart-top"><div><div class="label">Visitors</div><div class="hint">Today • Yesterday • 3 Days • 7 Days • 30 Days</div></div><div class="hint" style="font-family:'JetBrains Mono',monospace;">live</div></div>
+                  <div class="bars">
+                    <div class="bar-item"><div class="bar-col"><div class="bar visitor-bar"><span>0</span></div></div><div class="bar-label">Today</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar visitor-bar"><span>0</span></div></div><div class="bar-label">Yesterday</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar visitor-bar"><span>0</span></div></div><div class="bar-label">3 Days</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar visitor-bar"><span>0</span></div></div><div class="bar-label">7 Days</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar visitor-bar"><span>0</span></div></div><div class="bar-label">30 Days</div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="chip-row"><div class="chip">Visitors</div><div class="chip">Daily Buckets</div><div class="chip">LocalStorage</div></div>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div class="card-title">Uploads Statistics</div></div>
+            <div class="card-body">
+              <p>Total upload (img / vid / aud) berdasarkan waktu.</p>
+              <div class="chart-wrap">
+                <div class="chart-box">
+                  <div class="chart-top"><div><div class="label">Uploads</div><div class="hint">Today • Yesterday • 3 Days • 7 Days • 30 Days</div></div><div class="hint" style="font-family:'JetBrains Mono',monospace;">live</div></div>
+                  <div class="bars">
+                    <div class="bar-item"><div class="bar-col"><div class="bar upload-bar"><span>0</span></div></div><div class="bar-label">Today</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar upload-bar"><span>0</span></div></div><div class="bar-label">Yesterday</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar upload-bar"><span>0</span></div></div><div class="bar-label">3 Days</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar upload-bar"><span>0</span></div></div><div class="bar-label">7 Days</div></div>
+                    <div class="bar-item"><div class="bar-col"><div class="bar upload-bar"><span>0</span></div></div><div class="bar-label">30 Days</div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="chip-row"><div class="chip">Uploads</div><div class="chip">Cloudinary</div><div class="chip">ImgBB</div></div>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div><div class="card-title">Notes</div></div>
+            <div class="card-body">
+              <p>Catatan penggunaan uploader:</p>
+              <div class="chip-row"><div class="chip">Unsigned preset wajib</div><div class="chip">Cek ukuran file</div><div class="chip">Copy URL sekali klik</div><div class="chip">Preview sebelum upload</div></div>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><div class="card-icon"><i class="fa-solid fa-circle-info"></i></div><div class="card-title">System</div></div>
+            <div class="card-body"><p>Navigasi menggunakan metode hide/show section untuk menjaga performa dan konsistensi tampilan. Data statistik disimpan di LocalStorage.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFILE SECTION -->
+      <section id="profileTool" class="tool-section hidden">
+        <div class="dashboard-card profile-card">
+          <div class="profile-hero"><div class="profile-avatar-wrap"><img class="profile-avatar-big" src="https://i.ibb.co.com/chGXxvw1/avt.jpg" alt="avatar" referrerpolicy="no-referrer" /></div></div>
+          <div class="profile-body">
+            <div class="profile-center">
+              <div class="profile-name-big">jhon ofc</div>
+              <div class="profile-desc">JHON PRODUCTION dengan ketertarikan pada bidang teknologi. Memulai dari eksplorasi AI, kemudian memperluas fokus ke pengembangan web. Mengutamakan pembuatan antarmuka yang konsisten, rapi, dan mudah digunakan.</div>
+              <div class="chip-row" style="justify-content:center;"><div class="chip">JHON PRODUCTION</div><div class="chip">Web Development</div><div class="chip">UI / UX</div><div class="chip">Frontend</div></div>
+            </div>
+            <div class="stat-grid-2">
+              <div class="stat-card"><div class="k">FOKUS</div><div class="v">UI / UX</div></div>
+              <div class="stat-card"><div class="k">PROJECT</div><div class="v">jhon_tools</div></div>
+              <div class="stat-card"><div class="k">STACK</div><div class="v">HTML • CSS • JS</div></div>
+              <div class="stat-card"><div class="k">AKTIVITAS</div><div class="v">Upload Tools</div></div>
+            </div>
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+              <button class="tool-btn" onclick="showTool('dashboard')"><i class="fa-solid fa-gauge"></i> Back to Dashboard</button>
+              <button class="tool-btn" onclick="copyProfileBio()"><i class="fa-regular fa-copy"></i> Copy Bio</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS SECTION -->
+      <section id="settingsTool" class="tool-section hidden">
+        <div class="dashboard-card">
+          <div class="card-header"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div class="card-title">Settings</div></div>
+          <div class="card-body">
+            <p>Pengaturan tampilan dan preferensi dasar.</p>
+            <div class="settings-grid" style="margin-top:12px;">
+              <div class="setting-row">
+                <div class="setting-left"><div class="setting-ic"><i class="fa-solid fa-moon"></i></div><div><div class="setting-title">Tema Gelap</div><div class="setting-desc">Aktifkan mode gelap untuk tampilan yang lebih nyaman.</div></div></div>
+                <label class="switch"><input id="themeToggle" type="checkbox" /><span class="slider"></span></label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-left"><div class="setting-ic"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><div class="setting-title">Animasi Sederhana</div><div class="setting-desc">Hidupkan/matikan animasi transisi ringan.</div></div></div>
+                <label class="switch"><input id="motionToggle" type="checkbox" checked="" /><span class="slider"></span></label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-left"><div class="setting-ic"><i class="fa-solid fa-bars-staggered"></i></div><div><div class="setting-title">Auto-close Sidebar (Mobile)</div><div class="setting-desc">Tutup sidebar otomatis setelah memilih menu.</div></div></div>
+                <label class="switch"><input id="autoCloseToggle" type="checkbox" checked="" /><span class="slider"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMPTY TOOL CONTAINERS -->
+      <section id="imgTool" class="tool-section hidden"></section>
+      <section id="vidTool" class="tool-section hidden"></section>
+      <section id="audTool" class="tool-section hidden"></section>
+    </div>
+
+    <!-- TEMPLATES -->
+    <template id="tplImg">
+      <div class="dashboard-card">
+        <div class="card-header"><div class="card-icon"><i class="fa-solid fa-image"></i></div><div class="card-title">Img to URL (ImgBB Upload)</div></div>
+        <div class="card-body">
+          <div class="tool-grid">
+            <div>
+              <label class="tool-label">Pilih Gambar</label>
+              <input id="imgFile" class="tool-input" type="file" accept="image/*" />
+              <button id="imgUploadBtn" class="tool-btn primary" onclick="uploadImg()">Upload</button>
+              <div id="imgStatus" class="tool-status"></div>
+              <label class="tool-label" style="margin-top:12px;">Hasil URL</label>
+              <div class="tool-row"><input id="imgUrl" class="tool-input" type="text" readonly="" placeholder="URL akan muncul di sini" /><button class="tool-btn" onclick="copyUrl('imgUrl')"><i class="fa-regular fa-copy"></i> Copy</button></div>
+            </div>
+            <div><div class="preview-box"><div class="preview-title">Preview</div><img id="imgPreview" class="preview-media hidden" alt="preview" /><div id="imgPreviewEmpty" class="preview-empty">Belum ada gambar dipilih.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template id="tplVid">
+      <div class="dashboard-card">
+        <div class="card-header"><div class="card-icon"><i class="fa-solid fa-video"></i></div><div class="card-title">Vid to URL (Cloudinary Unsigned)</div></div>
+        <div class="card-body">
+          <div class="tool-grid">
+            <div>
+              <label class="tool-label">Pilih Video</label>
+              <input id="vidFile" class="tool-input" type="file" accept="video/*" />
+              <button id="vidUploadBtn" class="tool-btn primary" onclick="uploadVid()">Upload</button>
+              <div id="vidStatus" class="tool-status"></div>
+              <label class="tool-label" style="margin-top:12px;">Hasil URL</label>
+              <div class="tool-row"><input id="vidUrl" class="tool-input" type="text" readonly="" placeholder="URL akan muncul di sini" /><button class="tool-btn" onclick="copyUrl('vidUrl')"><i class="fa-regular fa-copy"></i> Copy</button></div>
+            </div>
+            <div><div class="preview-box"><div class="preview-title">Preview</div><video id="vidPreview" class="preview-media hidden" controls></video><div id="vidPreviewEmpty" class="preview-empty">Belum ada video dipilih.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template id="tplAud">
+      <div class="dashboard-card">
+        <div class="card-header"><div class="card-icon"><i class="fa-solid fa-music"></i></div><div class="card-title">Aud to URL (Cloudinary Unsigned)</div></div>
+        <div class="card-body">
+          <div class="tool-grid">
+            <div>
+              <label class="tool-label">Pilih Audio</label>
+              <input id="audFile" class="tool-input" type="file" accept="audio/*" />
+              <button id="audUploadBtn" class="tool-btn primary" onclick="uploadAud()">Upload</button>
+              <div id="audStatus" class="tool-status"></div>
+              <label class="tool-label" style="margin-top:12px;">Hasil URL</label>
+              <div class="tool-row"><input id="audUrl" class="tool-input" type="text" readonly="" placeholder="URL akan muncul di sini" /><button class="tool-btn" onclick="copyUrl('audUrl')"><i class="fa-regular fa-copy"></i> Copy</button></div>
+            </div>
+            <div><div class="preview-box"><div class="preview-title">Preview</div><audio id="audPreview" class="preview-media hidden" controls></audio><div id="audPreviewEmpty" class="preview-empty">Belum ada audio dipilih.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <script src="js/Uploader.js"></script>
+  </body>
+</html>

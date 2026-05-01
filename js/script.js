@@ -314,56 +314,16 @@ function initInfoPage() {
 // ========== NAVIGATION ==========
 function initNavigation() {
     const links = document.querySelectorAll('.nav-link');
-    const pages = { home: document.getElementById('homePage'), ssweb: document.getElementById('sswebPage'), info: document.getElementById('infoPage'), Upd: document.getElementById('UpdPage'), howto: document.getElementById('howtoPage'), guide: document.getElementById('guidePage'), docs: document.getElementById('docsPage') };
+    const pages = { home: document.getElementById('homePage'), ssweb: document.getElementById('sswebPage'), info: document.getElementById('infoPage'), howto: document.getElementById('howtoPage'), guide: document.getElementById('guidePage'), docs: document.getElementById('docsPage') };
     function switchPage(pageId) {
-        // sembunyikan semua page
         Object.values(pages).forEach(p => p?.classList.remove('active-page'));
-
-        // tampilkan page
-        if (pages[pageId]) {
-            pages[pageId].classList.add('active-page');
-        }
-
-        // 🔥 KHUSUS UPLOADER (iframe)
-        if (pageId === 'Upd') {
-    const frame = document.getElementById('uploaderFrame');
-    if (frame) {
-        frame.src = 'Uploader.html?' + Date.now(); // 🔥 reload tiap klik
-    }
-}
-
-        // set active navbar
+        if (pages[pageId]) pages[pageId].classList.add('active-page');
         links.forEach(l => l.classList.remove('active'));
         document.querySelector(`.nav-link[data-page="${pageId}"]`)?.classList.add('active');
-
-        // scroll atas
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // khusus info
-        if (pageId === 'info') {
-            loadBerita(currentBeritaSource);
-        }
+        if (pageId === 'info') { loadBerita(currentBeritaSource); }
     }
-
-    // 🔥 NAV CLICK FIX
-    links.forEach(l => {
-        l.addEventListener('click', (e) => {
-            const page = l.dataset.page;
-
-            if (pages[page]) {
-                e.preventDefault(); // hanya SPA
-                switchPage(page);
-            }
-
-            document.getElementById('navMenu')?.classList.remove('active');
-        });
-    });
-
-    // toggle menu mobile
-    document.getElementById('navToggle')?.addEventListener('click', () => {
-        document.getElementById('navMenu')?.classList.toggle('active');
-    });
-
-    // default page
+    links.forEach(l => { l.addEventListener('click', (e) => { e.preventDefault(); switchPage(l.dataset.page); document.getElementById('navMenu')?.classList.remove('active'); }); });
+    document.getElementById('navToggle')?.addEventListener('click', () => { document.getElementById('navMenu')?.classList.toggle('active'); });
     switchPage('home');
 }

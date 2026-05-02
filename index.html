@@ -76,7 +76,7 @@
             <div class="container"><div class="main-card"><div class="format-section"><label><i class="fas fa-camera"></i> Screenshot Website (SSWeb)</label><p style="color:#9ca3af;font-size:0.85rem;margin-top:-0.5rem;">Ambil screenshot dari website apapun secara instan</p></div><div class="param-section"><label><i class="fas fa-sliders-h"></i> Parameter SSWeb</label><div class="param-form" id="sswebParamForm"><div class="input-group"><label>URL Website <span style="color:#ef4444;">*</span></label><input type="url" id="sswebUrl" placeholder="https://example.com" value=""></div><div class="input-group"><label>Perangkat (Device)</label><select id="sswebDevice"><option value="" selected disabled>-- Pilih Perangkat --</option><option value="desktop">Desktop</option><option value="mobile">Mobile</option><option value="tablet">Tablet</option></select></div><div class="input-group"><label>Halaman Penuh (Full Page)</label><select id="sswebFullPage"><option value="" selected disabled>-- Pilih Opsi --</option><option value="penuh">Ya (Penuh)</option><option value="tidak">Tidak (Halaman terlihat)</option></select></div><div class="input-group"><label>Skala (Scale)</label><select id="sswebScale"><option value="" selected disabled>-- Pilih Skala --</option><option value="1">1x (Normal)</option><option value="2">2x (HD)</option><option value="3">3x (Ultra HD)</option></select></div></div></div><div class="action-section"><button id="sswebGenerateBtn" class="btn-generate"><i class="fas fa-camera"></i> Ambil Screenshot</button><div id="sswebLoading" class="generate-loading hidden"><div class="loading-spinner"><div class="spinner-ring"></div><div class="spinner-ring"></div><div class="spinner-ring"></div></div><div class="loading-message" id="sswebLoadingMessage"><i class="fas fa-globe"></i> Menghubungkan ke server...</div><div class="loading-progress"><div class="loading-progress-bar"><div class="loading-progress-fill" id="sswebProgressFill"></div></div><span id="sswebProgressPercent">0</span>%</div></div><div id="sswebResultArea" class="result-area"><div class="result-placeholder"><i class="fas fa-camera"></i><p>Screenshot website akan tampil di sini</p></div></div></div></div></div>
         </div>
 
-        <!-- PAGE: UPLOADER (FILE UPLOAD) -->
+        <!-- PAGE: UPLOADER -->
         <div id="uploaderPage" class="page-container">
             <div class="container">
                 <div class="main-card">
@@ -85,99 +85,113 @@
                         <p style="color:#9ca3af;font-size:0.85rem;margin-top:-0.5rem;">Upload gambar, video, atau audio ke cloud (ImgBB & Cloudinary)</p>
                     </div>
                     
-                    <!-- TABS UNTUK UPLOADER -->
-                    <div class="uploader-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <div class="uploader-tabs">
                         <button class="uploader-tab-btn active" data-uploader="img"><i class="fas fa-image"></i> Img to URL</button>
                         <button class="uploader-tab-btn" data-uploader="vid"><i class="fas fa-video"></i> Vid to URL</button>
                         <button class="uploader-tab-btn" data-uploader="aud"><i class="fas fa-music"></i> Aud to URL</button>
                     </div>
                     
-                    <!-- IMG UPLOADER -->
                     <div id="uploaderImg" class="uploader-section active-uploader">
-                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div>
-                                <div class="input-group">
-                                    <label><i class="fas fa-file-image"></i> Pilih Gambar</label>
-                                    <input id="imgFile" type="file" accept="image/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                        <div class="uploader-grid">
+                            <div class="uploader-left">
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-file-image"></i> Pilih Gambar</div>
+                                    <div class="file-input-wrapper">
+                                        <input type="file" id="imgFile" accept="image/*" class="file-input">
+                                        <label for="imgFile" class="file-input-label"><i class="fas fa-folder-open"></i> Pilih File</label>
+                                        <span id="imgFileName" class="file-name">Tidak ada file yang dipilih</span>
+                                    </div>
+                                    <button id="imgUploadBtn" class="btn-generate upload-btn" onclick="window.uploadImg && uploadImg()"><i class="fas fa-upload"></i> Upload ke ImgBB</button>
+                                    <div id="imgStatus" class="upload-status"></div>
                                 </div>
-                                <button id="imgUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadImg && uploadImg()"><i class="fas fa-upload"></i> Upload ke ImgBB</button>
-                                <div id="imgStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
-                                <div class="input-group" style="margin-top:16px;">
-                                    <label><i class="fas fa-link"></i> Hasil URL</label>
-                                    <div style="display: flex; gap: 10px;">
-                                        <input id="imgUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
-                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('imgUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-link"></i> Hasil URL</div>
+                                    <div class="url-wrapper">
+                                        <input type="text" id="imgUrl" class="url-input" readonly placeholder="URL akan muncul di sini">
+                                        <button class="copy-btn" onclick="window.copyUrl && copyUrl('imgUrl')"><i class="fas fa-copy"></i> Copy</button>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
-                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
-                                    <img id="imgPreview" style="max-width:100%; border-radius:12px; display:none;" alt="preview">
-                                    <div id="imgPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-image"></i> Belum ada gambar dipilih.</div>
+                            <div class="uploader-right">
+                                <div class="preview-card">
+                                    <div class="preview-card-title"><i class="fas fa-eye"></i> Preview</div>
+                                    <div class="preview-content">
+                                        <img id="imgPreview" class="preview-image" style="display:none;" alt="Preview">
+                                        <div id="imgPreviewEmpty" class="preview-placeholder"><i class="fas fa-image"></i><p>Belum ada gambar dipilih</p></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- VID UPLOADER -->
                     <div id="uploaderVid" class="uploader-section" style="display:none;">
-                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div>
-                                <div class="input-group">
-                                    <label><i class="fas fa-file-video"></i> Pilih Video</label>
-                                    <input id="vidFile" type="file" accept="video/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                        <div class="uploader-grid">
+                            <div class="uploader-left">
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-file-video"></i> Pilih Video</div>
+                                    <div class="file-input-wrapper">
+                                        <input type="file" id="vidFile" accept="video/*" class="file-input">
+                                        <label for="vidFile" class="file-input-label"><i class="fas fa-folder-open"></i> Pilih File</label>
+                                        <span id="vidFileName" class="file-name">Tidak ada file yang dipilih</span>
+                                    </div>
+                                    <button id="vidUploadBtn" class="btn-generate upload-btn" onclick="window.uploadVid && uploadVid()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
+                                    <div id="vidStatus" class="upload-status"></div>
                                 </div>
-                                <button id="vidUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadVid && uploadVid()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
-                                <div id="vidStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
-                                <div class="input-group" style="margin-top:16px;">
-                                    <label><i class="fas fa-link"></i> Hasil URL</label>
-                                    <div style="display: flex; gap: 10px;">
-                                        <input id="vidUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
-                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('vidUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-link"></i> Hasil URL</div>
+                                    <div class="url-wrapper">
+                                        <input type="text" id="vidUrl" class="url-input" readonly placeholder="URL akan muncul di sini">
+                                        <button class="copy-btn" onclick="window.copyUrl && copyUrl('vidUrl')"><i class="fas fa-copy"></i> Copy</button>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
-                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
-                                    <video id="vidPreview" style="max-width:100%; border-radius:12px; display:none;" controls></video>
-                                    <div id="vidPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-video"></i> Belum ada video dipilih.</div>
+                            <div class="uploader-right">
+                                <div class="preview-card">
+                                    <div class="preview-card-title"><i class="fas fa-eye"></i> Preview</div>
+                                    <div class="preview-content">
+                                        <video id="vidPreview" class="preview-video" style="display:none;" controls></video>
+                                        <div id="vidPreviewEmpty" class="preview-placeholder"><i class="fas fa-video"></i><p>Belum ada video dipilih</p></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- AUD UPLOADER -->
                     <div id="uploaderAud" class="uploader-section" style="display:none;">
-                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div>
-                                <div class="input-group">
-                                    <label><i class="fas fa-file-audio"></i> Pilih Audio</label>
-                                    <input id="audFile" type="file" accept="audio/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                        <div class="uploader-grid">
+                            <div class="uploader-left">
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-file-audio"></i> Pilih Audio</div>
+                                    <div class="file-input-wrapper">
+                                        <input type="file" id="audFile" accept="audio/*" class="file-input">
+                                        <label for="audFile" class="file-input-label"><i class="fas fa-folder-open"></i> Pilih File</label>
+                                        <span id="audFileName" class="file-name">Tidak ada file yang dipilih</span>
+                                    </div>
+                                    <button id="audUploadBtn" class="btn-generate upload-btn" onclick="window.uploadAud && uploadAud()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
+                                    <div id="audStatus" class="upload-status"></div>
                                 </div>
-                                <button id="audUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadAud && uploadAud()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
-                                <div id="audStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
-                                <div class="input-group" style="margin-top:16px;">
-                                    <label><i class="fas fa-link"></i> Hasil URL</label>
-                                    <div style="display: flex; gap: 10px;">
-                                        <input id="audUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
-                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('audUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                <div class="uploader-card">
+                                    <div class="uploader-card-title"><i class="fas fa-link"></i> Hasil URL</div>
+                                    <div class="url-wrapper">
+                                        <input type="text" id="audUrl" class="url-input" readonly placeholder="URL akan muncul di sini">
+                                        <button class="copy-btn" onclick="window.copyUrl && copyUrl('audUrl')"><i class="fas fa-copy"></i> Copy</button>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
-                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
-                                    <audio id="audPreview" style="max-width:100%; border-radius:12px; display:none;" controls></audio>
-                                    <div id="audPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-music"></i> Belum ada audio dipilih.</div>
+                            <div class="uploader-right">
+                                <div class="preview-card">
+                                    <div class="preview-card-title"><i class="fas fa-eye"></i> Preview</div>
+                                    <div class="preview-content">
+                                        <audio id="audPreview" class="preview-audio" style="display:none;" controls></audio>
+                                        <div id="audPreviewEmpty" class="preview-placeholder"><i class="fas fa-music"></i><p>Belum ada audio dipilih</p></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <footer style="margin-top: 2rem; text-align: center; font-size:0.8rem; color:#6c757d;">
-                        <p>⚡ Powered by ImgBB & Cloudinary • Hasil upload berupa URL permanen</p>
+                        <p><i class="fas fa-cloud-upload-alt"></i> Powered by ImgBB & Cloudinary • Hasil upload berupa URL permanen</p>
                     </footer>
                 </div>
             </div>
@@ -215,7 +229,18 @@
             <div class="guide-section"><h3><i class="fab fa-spotify"></i> Spotify Card</h3><p>Untuk membuat kartu "sedang diputar" ala Spotify menggunakan parameter URL.</p><div class="guide-example">Parameter: Judul Lagu, Artis, Waktu Mulai (ms), Waktu Akhir (ms), URL Gambar, Warna Border</div></div>
             <div class="guide-section"><h3><i class="fas fa-shield-alt"></i> Captcha Image</h3><p>Membuat gambar captcha custom dengan background dan kode captcha.</p><div class="guide-example">Parameter: URL Avatar, URL Background, Kode Captcha, Warna Border, overlay</div></div>
             <div class="guide-section"><h3><i class="fas fa-lock"></i> Security Card</h3><p>Membuat kartu tersangka keamanan untuk keperluan forensik atau SOC.</p><div class="guide-example">Parameter: URL Avatar, URL Background, Created Timestamp, Suspect Timestamp, locale</div></div>
+            
+            <!-- FITUR BARU -->
+            <div class="guide-section"><h3><i class="fas fa-adjust"></i> Greyscale Image</h3><p>Mengubah gambar menjadi hitam putih (grayscale).</p><div class="guide-example">Parameter: URL Gambar</div></div>
+            <div class="guide-section"><h3><i class="fas fa-eye-dropper"></i> Invert Image</h3><p>Membalikkan warna gambar (negative effect).</p><div class="guide-example">Parameter: URL Gambar</div></div>
+            <div class="guide-section"><h3><i class="fas fa-blur"></i> Blur Image Effect</h3><p>Memberikan efek blur pada gambar.</p><div class="guide-example">Parameter: URL Gambar</div></div>
+            <div class="guide-section"><h3><i class="fas fa-face-smile"></i> Affect Image</h3><p>Memberikan efek emoji affect pada gambar.</p><div class="guide-example">Parameter: URL Gambar</div></div>
+            <div class="guide-section"><h3><i class="fas fa-kiss-wink-heart"></i> Kiss Image</h3><p>Membuat gambar efek ciuman antara dua orang.</p><div class="guide-example">Parameter: URL Gambar 1, URL Gambar 2</div></div>
+            <div class="guide-section"><h3><i class="fas fa-facepalm"></i> Facepalm Image</h3><p>Menambahkan efek facepalm pada gambar.</p><div class="guide-example">Parameter: URL Gambar</div></div>
+            <div class="guide-section"><h3><i class="fab fa-twitter"></i> Tweet Card</h3><p>Membuat kartu tweet Twitter kustom.</p><div class="guide-example">Parameter: Display Name, Username, Tweet Text, URL Avatar, Verified (true/false), Theme (dark/light)</div></div>
+            <div class="guide-section"><h3><i class="fas fa-trash-alt"></i> Delete Image</h3><p>Menambahkan efek "delete" pada gambar.</p><div class="guide-example">Parameter: URL Gambar</div></div>
             <div class="guide-section"><h3><i class="fas fa-cloud-upload-alt"></i> Uploader</h3><p>Fitur upload file ke cloud: gambar via ImgBB, video/audio via Cloudinary. Hasil upload berupa URL permanen yang bisa langsung disalin.</p><div class="guide-example">Cara: Pilih file gambar/video/audio, klik Upload, tunggu proses, copy URL yang dihasilkan.</div></div>
+            
             <div class="tips-section" style="margin-top: 2rem;">
                         <h3><i class="fas fa-info-circle"></i> Informasi Penting</h3>
                         <ul>
@@ -258,7 +283,7 @@ GEMPA: /api/info/bmkg
 CUACA: /api/info/cuaca?q=nama_kota
 JADWAL TV: /api/info/jadwaltv?channel=sctv
 
-MAKER ENDPOINTS:
+MAKER ENDPOINTS V1:
 • /maker/brat
 • /maker/fakecall
 • /maker/fakechannel
@@ -270,6 +295,31 @@ MAKER ENDPOINTS:
 • /maker/faketiktok
 • /maker/fakettcomment
 • /maker/fakeytcomunity
+
+MAKER ENDPOINTS V2 (CANVAS):
+• /api/canvas/greyscale
+• /api/canvas/invert
+• /api/canvas/blur
+• /api/canvas/affect
+• /api/canvas/kiss
+• /api/canvas/facepalm
+• /api/canvas/tweet
+• /api/canvas/delete
+• /api/canvas/batslap
+• /api/canvas/ship
+• /api/canvas/goodbyev1
+• /api/canvas/welcomev1
+• /api/canvas/spotify
+• /api/canvas/captcha
+• /api/canvas/security
+• /api/canvas/level-up
+• /api/canvas/profile
+• /api/canvas/beautiful
+• /api/canvas/gay
+• /api/canvas/xny67
+• /api/canvas/sertifikat-tolol
+• /api/canvas/fake-xny67
+• /api/canvas/ektp
 
 UPLOADER:
 • ImgBB API: https://api.imgbb.com/1/upload
@@ -288,7 +338,7 @@ UPLOADER:
                 <table class="docs-table">
                     <thead><tr><th>Fungsi</th><th>Deskripsi</th></tr></thead>
                     <tbody>
-                        <tr><td><code>renderFormatGrid()</code></td><td>Menampilkan daftar format mockup</td></tr>
+                        <tr><td><code>renderFormatGrid()</code></td><td>Menampilkan daftar format mockup</tr>
                         <tr><td><code>generateMockup()</code></td><td>Memanggil API dan menampilkan hasil</td></tr>
                         <tr><td><code>uploadImg()</code></td><td>Upload gambar ke ImgBB</td></tr>
                         <tr><td><code>uploadVid()</code></td><td>Upload video ke Cloudinary</td></tr>

@@ -14,9 +14,8 @@ const formatsV1 = [
     { id: 'ytcomment', name: 'YT Comment', icon: 'fab fa-youtube', endpoint: '/maker/ytcomment', baseUrl: 'https://api.deline.web.id', params: [{ name: 'username', label: 'Username', type: 'text', placeholder: 'cpmjhon21' }, { name: 'text', label: 'Komentar', type: 'textarea', placeholder: 'Tulis komentar di sini...' }, { name: 'avatar', label: 'URL Avatar', type: 'url', placeholder: 'https://example.com/avatar.jpg' }] }
 ];
 
-// ========== FORMAT MOCKUP V2 (DENGAN SEMUA FITUR BARU) ==========
+// ========== FORMAT MOCKUP V2 ==========
 const formatsV2 = [
-    // CANVAS EFFECTS
     { id: 'goodbye', name: 'Goodbye V1', icon: 'fas fa-sign-out-alt', endpoint: '/api/canvas/goodbyev1', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'username', label: 'Username', type: 'text' }, { name: 'guildName', label: 'Nama Guild', type: 'text' }, { name: 'guildIcon', label: 'URL Icon Guild', type: 'url' }, { name: 'memberCount', label: 'Jumlah Member', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'quality', label: 'Kualitas (1-100)', type: 'text' }] },
     { id: 'welcome', name: 'Welcome V1', icon: 'fas fa-sign-in-alt', endpoint: '/api/canvas/welcomev1', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'username', label: 'Username', type: 'text' }, { name: 'guildName', label: 'Nama Guild', type: 'text' }, { name: 'guildIcon', label: 'URL Icon Guild', type: 'url' }, { name: 'memberCount', label: 'Jumlah Member', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'quality', label: 'Kualitas (1-100)', type: 'text' }] },
     { id: 'spotify', name: 'Spotify Card', icon: 'fab fa-spotify', endpoint: '/api/canvas/spotify', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'title', label: 'Judul Lagu', type: 'text' }, { name: 'artist', label: 'Artis', type: 'text' }, { name: 'start', label: 'Waktu Mulai (ms)', type: 'text' }, { name: 'end', label: 'Waktu Akhir (ms)', type: 'text' }, { name: 'image', label: 'URL Gambar', type: 'url' }, { name: 'border', label: 'Warna Border', type: 'text' }, { name: 'album', label: 'Nama Album', type: 'text' }] },
@@ -30,8 +29,6 @@ const formatsV2 = [
     { id: 'ektp', name: 'eKTP Generator', icon: 'fas fa-id-card', endpoint: '/api/canvas/ektp', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'provinsi', label: 'Provinsi', type: 'text' }, { name: 'kota', label: 'Kota', type: 'text' }, { name: 'nik', label: 'NIK', type: 'text' }, { name: 'nama', label: 'Nama', type: 'text' }, { name: 'ttl', label: 'Tempat/Tgl Lahir', type: 'text' }, { name: 'jenis_kelamin', label: 'Jenis Kelamin', type: 'text' }, { name: 'golongan_darah', label: 'Golongan Darah', type: 'text' }, { name: 'alamat', label: 'Alamat', type: 'textarea' }, { name: 'rt/rw', label: 'RT/RW', type: 'text' }, { name: 'kel/desa', label: 'Kelurahan/Desa', type: 'text' }, { name: 'kecamatan', label: 'Kecamatan', type: 'text' }, { name: 'agama', label: 'Agama', type: 'text' }, { name: 'status', label: 'Status Perkawinan', type: 'text' }, { name: 'pekerjaan', label: 'Pekerjaan', type: 'text' }, { name: 'kewarganegaraan', label: 'Kewarganegaraan', type: 'text' }, { name: 'masa_berlaku', label: 'Masa Berlaku', type: 'text' }, { name: 'terbuat', label: 'Tanggal Terbuat', type: 'text' }, { name: 'pas_photo', label: 'URL Pas Photo', type: 'url' }] },
     { id: 'levelup', name: 'Level Up Card', icon: 'fas fa-level-up-alt', endpoint: '/api/canvas/level-up', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'backgroundURL', label: 'URL Background', type: 'url' }, { name: 'avatarURL', label: 'URL Avatar', type: 'url' }, { name: 'fromLevel', label: 'Dari Level', type: 'text' }, { name: 'toLevel', label: 'Ke Level', type: 'text' }, { name: 'name', label: 'Nama', type: 'text' }] },
     { id: 'security', name: 'Security Card', icon: 'fas fa-shield-virus', endpoint: '/api/canvas/security', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'createdTimestamp', label: 'Created Timestamp', type: 'text' }, { name: 'suspectTimestamp', label: 'Suspect Timestamp', type: 'text' }, { name: 'locale', label: 'Locale', type: 'text' }] },
-    
-    // NEW IMAGE EFFECTS
     { id: 'greyscale', name: 'Greyscale Image', icon: 'fas fa-adjust', endpoint: '/api/canvas/greyscale', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url', placeholder: 'https://example.com/image.jpg' }] },
     { id: 'invert', name: 'Invert Image', icon: 'fas fa-eye-dropper', endpoint: '/api/canvas/invert', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url', placeholder: 'https://example.com/image.jpg' }] },
     { id: 'blur', name: 'Blur Image Effect', icon: 'fas fa-blur', endpoint: '/api/canvas/blur', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url', placeholder: 'https://example.com/image.jpg' }] },
@@ -39,18 +36,12 @@ const formatsV2 = [
     { id: 'delete', name: 'Delete Image', icon: 'fas fa-trash-alt', endpoint: '/api/canvas/delete', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url', placeholder: 'https://example.com/image.jpg' }] },
     { id: 'facepalm', name: 'Facepalm Image', icon: 'fas fa-facepalm', endpoint: '/api/canvas/facepalm', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url', placeholder: 'https://example.com/image.jpg' }] },
     { id: 'kiss', name: 'Kiss Image', icon: 'fas fa-kiss-wink-heart', endpoint: '/api/canvas/kiss', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image1', label: 'URL Gambar 1', type: 'url', placeholder: 'https://example.com/person1.jpg' }, { name: 'image2', label: 'URL Gambar 2', type: 'url', placeholder: 'https://example.com/person2.jpg' }] },
-    { id: 'batslap', name: 'Batslap Image', icon: 'fas fa-hand-back-fist', endpoint: '/api/canvas/batslap', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image1', label: 'URL Gambar 1 (Orang yang kena)', type: 'url', placeholder: 'https://example.com/victim.jpg' }, { name: 'image2', label: 'URL Gambar 2 (Orang yang memukul)', type: 'url', placeholder: 'https://example.com/hitter.jpg' }] },
+    { id: 'batslap', name: 'Batslap Image', icon: 'fas fa-hand-back-fist', endpoint: '/api/canvas/batslap', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image1', label: 'URL Gambar 1', type: 'url', placeholder: 'https://example.com/victim.jpg' }, { name: 'image2', label: 'URL Gambar 2', type: 'url', placeholder: 'https://example.com/hitter.jpg' }] },
     { id: 'ship', name: 'Ship Image', icon: 'fas fa-heart', endpoint: '/api/canvas/ship', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'avatar1', label: 'URL Avatar 1', type: 'url', placeholder: 'https://example.com/avatar1.jpg' }, { name: 'avatar2', label: 'URL Avatar 2', type: 'url', placeholder: 'https://example.com/avatar2.jpg' }, { name: 'background', label: 'URL Background (Opsional)', type: 'url', placeholder: 'https://example.com/background.jpg' }, { name: 'persen', label: 'Persentase (%)', type: 'text', placeholder: '50' }] },
-    
-    // SOCIAL MEDIA CARD
     { id: 'tweet', name: 'Tweet Card', icon: 'fab fa-twitter', endpoint: '/api/canvas/tweet', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'displayName', label: 'Display Name', type: 'text', placeholder: 'John Doe' }, { name: 'username', label: 'Username', type: 'text', placeholder: '@johndoe' }, { name: 'comment', label: 'Tweet Text', type: 'textarea', placeholder: 'Tulis tweet di sini...' }, { name: 'avatar', label: 'URL Avatar', type: 'url', placeholder: 'https://example.com/avatar.jpg' }, { name: 'verified', label: 'Verified (true/false)', type: 'text', placeholder: 'true' }, { name: 'theme', label: 'Theme (dark/light)', type: 'text', placeholder: 'dark' }] },
-    
-    // TEXT EFFECTS
     { id: 'textpro', name: 'TextPro', icon: 'fas fa-text-height', endpoint: '/api/m/textpro', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL TextPro', type: 'url' }, { name: 'text1', label: 'Teks 1', type: 'text' }, { name: 'text2', label: 'Teks 2', type: 'text' }] },
     { id: 'photooxy', name: 'PhotoOxy', icon: 'fas fa-image', endpoint: '/api/m/photooxy', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL PhotoOxy', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
     { id: 'ephoto360', name: 'Ephoto360', icon: 'fas fa-edit', endpoint: '/api/m/ephoto360', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL Ephoto360', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
-    
-    // RANDOM IMAGES
     { id: 'random_bluearchive', name: 'Random Blue Archive', icon: 'fas fa-dice-d6', endpoint: '/api/r/blue-archive', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_thailand', name: 'Random Cecan Thailand', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/thailand', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_china', name: 'Random Cecan China', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/china', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
@@ -235,6 +226,38 @@ async function fetchNekosBest() {
     throw new Error('No URL from Nekos.best');
 }
 
+// ========== FUNGSI FETCH DENGAN RETRY UNTUK HANDLE 503 ==========
+async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 25000);
+            
+            const response = await fetch(url, {
+                ...options,
+                signal: controller.signal,
+                headers: {
+                    'Accept': 'application/json, image/*',
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                    ...options?.headers
+                }
+            });
+            clearTimeout(timeoutId);
+            
+            if (response.ok) return response;
+            if (response.status === 503 && i < retries - 1) {
+                console.log(`Retry ${i + 1} untuk ${url}...`);
+                await new Promise(resolve => setTimeout(resolve, delay * (i + 1)));
+                continue;
+            }
+            throw new Error(`HTTP ${response.status}`);
+        } catch (err) {
+            if (i === retries - 1) throw err;
+            await new Promise(resolve => setTimeout(resolve, delay * (i + 1)));
+        }
+    }
+}
+
 // ========== MOCKUP FUNCTIONS ==========
 function renderFormatGridV1() { renderFormatGrid('V1', formatsV1, activeFormatV1, (f) => activeFormatV1 = f); }
 function renderParamFormV1() { renderParamForm('V1', activeFormatV1); }
@@ -303,25 +326,39 @@ async function generateMockup(version) {
         let params = {};
         inputs.forEach(inp => { if (inp.value.trim()) params[inp.name] = encodeURIComponent(inp.value.trim()); });
         
-        const baseUrl = activeFormat.baseUrl || 'https://api.zenzxz.my.id';
+        const baseUrl = activeFormat.baseUrl || 'https://api.siputzx.my.id';
         let apiUrl = `${baseUrl}${activeFormat.endpoint}?`;
         apiUrl += Object.entries(params).map(([k, v]) => `${k}=${v}`).join('&');
         
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000);
+        console.log('Fetching:', apiUrl);
         
-        const response = await fetch(apiUrl, { 
-            signal: controller.signal,
-            method: 'GET', 
-            headers: { 
-                'Accept': 'image/*, application/json',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        let response;
+        
+        // Khusus untuk Tweet Card, coba multiple endpoints
+        if (activeFormat.id === 'tweet') {
+            const altEndpoints = [
+                apiUrl,
+                `https://api.siputzx.my.id/api/canvas/tweet?${new URLSearchParams(params).toString()}`,
+                `https://api.zenzxz.my.id/api/canvas/tweet?${new URLSearchParams(params).toString()}`
+            ];
+            
+            let success = false;
+            for (let i = 0; i < altEndpoints.length; i++) {
+                try {
+                    console.log(`Mencoba endpoint tweet ${i + 1}:`, altEndpoints[i]);
+                    const altResponse = await fetchWithRetry(altEndpoints[i], { method: 'GET' }, 2, 1000);
+                    if (altResponse.ok) {
+                        response = altResponse;
+                        success = true;
+                        break;
+                    }
+                } catch (err) {
+                    console.log(`Endpoint tweet ${i + 1} gagal:`, err.message);
+                }
             }
-        });
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            if (!success) throw new Error('Tweet Card service sedang sibuk, coba lagi nanti');
+        } else {
+            response = await fetchWithRetry(apiUrl, { method: 'GET' }, 3, 1000);
         }
         
         const contentType = response.headers.get('content-type') || '';
@@ -339,6 +376,8 @@ async function generateMockup(version) {
             else if (data.url) imgUrl = data.url;
             else if (data.image) imgUrl = data.image;
             else if (data.data?.url) imgUrl = data.data.url;
+            else if (data.status && data.data) imgUrl = data.data;
+            else if (typeof data === 'string' && data.startsWith('http')) imgUrl = data;
             else throw new Error('Tidak dapat menemukan URL gambar dalam response');
             
             const imgResponse = await fetch(imgUrl, {
@@ -377,9 +416,17 @@ async function generateMockup(version) {
         
     } catch (err) { 
         console.error('Generate error:', err);
-        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal: ${err.message}</p><p style="font-size:12px; margin-top:8px;">Tips: Periksa koneksi internet dan coba lagi</p></div>`; 
+        let errorMessage = err.message;
+        if (err.message.includes('503')) {
+            errorMessage = 'Server sedang sibuk. Silakan coba lagi dalam beberapa saat. (HTTP 503)';
+        } else if (err.message.includes('Failed to fetch')) {
+            errorMessage = 'Koneksi terputus. Periksa koneksi internet Anda.';
+        } else if (err.message.includes('NetworkError')) {
+            errorMessage = 'Gagal terhubung ke server. Coba lagi nanti.';
+        }
+        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal: ${errorMessage}</p><p style="font-size:12px; margin-top:8px;">Tips: Coba lagi nanti atau pilih format lain</p></div>`; 
         hideGenerateLoading(loadingObj, false, version); 
-        if (window.showToast) window.showToast(err.message, 'error'); 
+        if (window.showToast) window.showToast(errorMessage, 'error'); 
     }
 }
 

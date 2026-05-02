@@ -51,7 +51,6 @@ function setLoading(btn, statusEl, loading) {
     }
 }
 
-// ==================== UPDATE FILE NAME DISPLAY ====================
 function updateFileName(inputId, nameDisplayId) {
     const input = document.getElementById(inputId);
     const display = document.getElementById(nameDisplayId);
@@ -67,7 +66,6 @@ function updateFileName(inputId, nameDisplayId) {
     });
 }
 
-// ==================== PREVIEW BINDING ====================
 function bindPreview(inputId, mediaId, emptyId) {
     const input = document.getElementById(inputId);
     const media = document.getElementById(mediaId);
@@ -95,7 +93,6 @@ function bindPreview(inputId, mediaId, emptyId) {
     });
 }
 
-// ==================== UPLOAD KE IMGBB (GAMBAR) ====================
 async function uploadToImgBB(file) {
     const formData = new FormData();
     formData.append("image", file);
@@ -118,7 +115,6 @@ async function uploadToImgBB(file) {
     return url;
 }
 
-// ==================== UPLOAD KE CLOUDINARY (VIDEO & AUDIO) ====================
 async function uploadCloudinary(file, endpoint) {
     const form = new FormData();
     form.append('file', file);
@@ -130,7 +126,6 @@ async function uploadCloudinary(file, endpoint) {
     return json.secure_url;
 }
 
-// ==================== UPLOAD FUNCTIONS ====================
 async function uploadImg() {
     const fileInput = document.getElementById('imgFile');
     const btn = document.getElementById('imgUploadBtn');
@@ -217,7 +212,6 @@ async function uploadAud() {
     }
 }
 
-// ==================== UPLOADER TABS ====================
 function initUploaderTabs() {
     const tabs = document.querySelectorAll('.uploader-tab-btn');
     const sections = {
@@ -240,7 +234,6 @@ function initUploaderTabs() {
     });
 }
 
-// ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
     bindPreview('imgFile', 'imgPreview', 'imgPreviewEmpty');
     bindPreview('vidFile', 'vidPreview', 'vidPreviewEmpty');

@@ -14,7 +14,7 @@ const formatsV1 = [
     { id: 'ytcomment', name: 'YT Comment', icon: 'fab fa-youtube', endpoint: '/maker/ytcomment', baseUrl: 'https://api.deline.web.id', params: [{ name: 'username', label: 'Username', type: 'text', placeholder: 'cpmjhon21' }, { name: 'text', label: 'Komentar', type: 'textarea', placeholder: 'Tulis komentar di sini...' }, { name: 'avatar', label: 'URL Avatar', type: 'url', placeholder: 'https://example.com/avatar.jpg' }] }
 ];
 
-// ========== FORMAT MOCKUP V2 ==========
+// ========== FORMAT MOCKUP V2 (TANPA TWEET CARD) ==========
 const formatsV2 = [
     { id: 'goodbye', name: 'Goodbye V1', icon: 'fas fa-sign-out-alt', endpoint: '/api/canvas/goodbyev1', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'username', label: 'Username', type: 'text' }, { name: 'guildName', label: 'Nama Guild', type: 'text' }, { name: 'guildIcon', label: 'URL Icon Guild', type: 'url' }, { name: 'memberCount', label: 'Jumlah Member', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'quality', label: 'Kualitas (1-100)', type: 'text' }] },
     { id: 'welcome', name: 'Welcome V1', icon: 'fas fa-sign-in-alt', endpoint: '/api/canvas/welcomev1', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'username', label: 'Username', type: 'text' }, { name: 'guildName', label: 'Nama Guild', type: 'text' }, { name: 'guildIcon', label: 'URL Icon Guild', type: 'url' }, { name: 'memberCount', label: 'Jumlah Member', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'quality', label: 'Kualitas (1-100)', type: 'text' }] },
@@ -38,7 +38,7 @@ const formatsV2 = [
     { id: 'kiss', name: 'Kiss Image', icon: 'fas fa-kiss-wink-heart', endpoint: '/api/canvas/kiss', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image1', label: 'URL Gambar 1', type: 'url', placeholder: 'https://example.com/person1.jpg' }, { name: 'image2', label: 'URL Gambar 2', type: 'url', placeholder: 'https://example.com/person2.jpg' }] },
     { id: 'batslap', name: 'Batslap Image', icon: 'fas fa-hand-back-fist', endpoint: '/api/canvas/batslap', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image1', label: 'URL Gambar 1', type: 'url', placeholder: 'https://example.com/victim.jpg' }, { name: 'image2', label: 'URL Gambar 2', type: 'url', placeholder: 'https://example.com/hitter.jpg' }] },
     { id: 'ship', name: 'Ship Image', icon: 'fas fa-heart', endpoint: '/api/canvas/ship', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'avatar1', label: 'URL Avatar 1', type: 'url', placeholder: 'https://example.com/avatar1.jpg' }, { name: 'avatar2', label: 'URL Avatar 2', type: 'url', placeholder: 'https://example.com/avatar2.jpg' }, { name: 'background', label: 'URL Background (Opsional)', type: 'url', placeholder: 'https://example.com/background.jpg' }, { name: 'persen', label: 'Persentase (%)', type: 'text', placeholder: '50' }] },
-    { id: 'tweet', name: 'Tweet Card', icon: 'fab fa-twitter', endpoint: '/api/canvas/tweet', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'displayName', label: 'Display Name', type: 'text', placeholder: 'John Doe' }, { name: 'username', label: 'Username', type: 'text', placeholder: '@johndoe' }, { name: 'comment', label: 'Tweet Text', type: 'textarea', placeholder: 'Tulis tweet di sini...' }, { name: 'avatar', label: 'URL Avatar', type: 'url', placeholder: 'https://example.com/avatar.jpg' }, { name: 'verified', label: 'Verified (true/false)', type: 'text', placeholder: 'true' }, { name: 'theme', label: 'Theme (dark/light)', type: 'text', placeholder: 'dark' }] },
+    { id: 'quote', name: 'Quote/Reminder Card', icon: 'fas fa-quote-right', endpoint: '/api/canvas/quote', baseUrl: 'https://api.siputzx.my.id', isQuoteCard: true, params: [{ name: 'text', label: 'Teks Quote', type: 'textarea', placeholder: 'Masukkan teks quote di sini...\nGunakan [kurung siku] untuk highlight teks' }, { name: 'author', label: 'Nama Penulis/Sumber', type: 'text', placeholder: 'Seseorang' }, { name: 'bgUrl', label: 'URL Background (Opsional)', type: 'url', placeholder: 'https://example.com/background.jpg' }, { name: 'fontUrl', label: 'URL Font (Opsional)', type: 'url', placeholder: 'https://example.com/font.ttf' }] },
     { id: 'textpro', name: 'TextPro', icon: 'fas fa-text-height', endpoint: '/api/m/textpro', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL TextPro', type: 'url' }, { name: 'text1', label: 'Teks 1', type: 'text' }, { name: 'text2', label: 'Teks 2', type: 'text' }] },
     { id: 'photooxy', name: 'PhotoOxy', icon: 'fas fa-image', endpoint: '/api/m/photooxy', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL PhotoOxy', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
     { id: 'ephoto360', name: 'Ephoto360', icon: 'fas fa-edit', endpoint: '/api/m/ephoto360', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL Ephoto360', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
@@ -226,7 +226,7 @@ async function fetchNekosBest() {
     throw new Error('No URL from Nekos.best');
 }
 
-// ========== FUNGSI FETCH DENGAN RETRY UNTUK HANDLE 503 ==========
+// ========== FUNGSI FETCH DENGAN RETRY ==========
 async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
     for (let i = 0; i < retries; i++) {
         try {
@@ -255,6 +255,188 @@ async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
             if (i === retries - 1) throw err;
             await new Promise(resolve => setTimeout(resolve, delay * (i + 1)));
         }
+    }
+}
+
+// ========== QUOTE/REMINDER CARD GENERATOR ==========
+async function generateQuoteCard(text, author, bgUrl = null, fontUrl = null) {
+    console.log('📝 Generating Quote Card...');
+    
+    if (!text || text.trim() === '') {
+        throw new Error('Teks quote tidak boleh kosong');
+    }
+    
+    const backgroundUrl = bgUrl || 'https://raw.githubusercontent.com/Ditzzx-vibecoder/Assets/main/Image/_20260425155846190.jpeg';
+    const fontUrlToUse = fontUrl || 'https://raw.githubusercontent.com/Ditzzx-vibecoder/Assets/main/Font/CrimsonText-Regular.ttf';
+    
+    const PADDING_RATIO = 0.15;
+    const FOOTER_RATIO = 0.12;
+    const QUOTE_COLOR = '#1a1a1a';
+    const FONT_SIZE_MAX = 60;
+    const FONT_SIZE_MIN = 20;
+    
+    async function loadFontAndImage() {
+        const [fontResponse, bgResponse] = await Promise.all([
+            fetch(fontUrlToUse),
+            fetch(backgroundUrl)
+        ]);
+        
+        if (!fontResponse.ok) throw new Error('Gagal memuat font');
+        if (!bgResponse.ok) throw new Error('Gagal memuat background');
+        
+        const fontBuffer = await fontResponse.arrayBuffer();
+        const bgBuffer = await bgResponse.arrayBuffer();
+        
+        return { fontBuffer, bgBuffer };
+    }
+    
+    function calcFontSize(ctx, text, maxWidth, maxHeight, fontName) {
+        const words = text.split(' ');
+        
+        for (let size = FONT_SIZE_MAX; size >= FONT_SIZE_MIN; size -= 1) {
+            ctx.font = `${size}px ${fontName}`;
+            const lineHeight = size * 1.35;
+            
+            let lines = 0;
+            let currentLine = [];
+            
+            words.forEach(word => {
+                const testLine = [...currentLine, word].join(' ').replace(/[\[\]]/g, '');
+                if (ctx.measureText(testLine).width > maxWidth && currentLine.length > 0) {
+                    lines++;
+                    currentLine = [word];
+                } else {
+                    currentLine.push(word);
+                }
+            });
+            lines++;
+            
+            if (lines * lineHeight <= maxHeight) return size;
+        }
+        
+        return FONT_SIZE_MIN;
+    }
+    
+    function drawTextJustified(ctx, text, centerX, centerY, maxWidth, fontSize, fontName) {
+        const lineHeight = fontSize * 1.35;
+        const words = text.split(' ');
+        let lines = [];
+        let currentLine = [];
+        
+        words.forEach(word => {
+            const testLine = [...currentLine, word].join(' ').replace(/[\[\]]/g, '');
+            if (ctx.measureText(testLine).width > maxWidth && currentLine.length > 0) {
+                lines.push(currentLine);
+                currentLine = [word];
+            } else {
+                currentLine.push(word);
+            }
+        });
+        lines.push(currentLine);
+        
+        let startY = centerY - ((lines.length - 1) * lineHeight) / 2;
+        
+        lines.forEach((line, index) => {
+            const isLastLine = index === lines.length - 1;
+            
+            const lineParts = line.map(word => {
+                const match = word.match(/^\[(.+?)\]([^\w]*)$/);
+                if (match) {
+                    const highlighted = match[1];
+                    const trailing = match[2];
+                    const hlWidth = ctx.measureText(highlighted).width;
+                    const trailWidth = ctx.measureText(trailing).width;
+                    return { content: highlighted, trailing, isHighlight: true, width: hlWidth + trailWidth, hlWidth };
+                }
+                return { content: word, trailing: '', isHighlight: false, width: ctx.measureText(word).width, hlWidth: 0 };
+            });
+            
+            const totalWordsWidth = lineParts.reduce((sum, p) => sum + p.width, 0);
+            let currentX, spaceWidth;
+            
+            if (!isLastLine && line.length > 1) {
+                spaceWidth = (maxWidth - totalWordsWidth) / (line.length - 1);
+                currentX = centerX - maxWidth / 2;
+            } else {
+                const standardSpace = ctx.measureText(' ').width;
+                spaceWidth = standardSpace;
+                currentX = centerX - (totalWordsWidth + standardSpace * (line.length - 1)) / 2;
+            }
+            
+            lineParts.forEach(part => {
+                if (part.isHighlight) {
+                    ctx.fillStyle = 'rgba(212, 225, 87, 0.85)';
+                    ctx.fillRect(currentX, startY - fontSize * 0.45, part.hlWidth, fontSize * 0.95);
+                }
+                ctx.fillStyle = QUOTE_COLOR;
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'left';
+                ctx.fillText(part.content, currentX, startY);
+                if (part.trailing) {
+                    ctx.fillText(part.trailing, currentX + part.hlWidth, startY);
+                }
+                currentX += part.width + spaceWidth;
+            });
+            
+            startY += lineHeight;
+        });
+    }
+    
+    try {
+        const { fontBuffer, bgBuffer } = await loadFontAndImage();
+        
+        const bgBlob = new Blob([bgBuffer], { type: 'image/jpeg' });
+        const bgUrlBlob = URL.createObjectURL(bgBlob);
+        
+        const bgImage = await new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = bgUrlBlob;
+        });
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = bgImage.width;
+        canvas.height = bgImage.height;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(bgUrlBlob);
+        
+        const fontBlob = new Blob([fontBuffer], { type: 'font/ttf' });
+        const fontUrlBlob = URL.createObjectURL(fontBlob);
+        
+        const font = new FontFace('CustomFont', `url(${fontUrlBlob})`);
+        await font.load();
+        document.fonts.add(font);
+        URL.revokeObjectURL(fontUrlBlob);
+        
+        const padding = canvas.width * PADDING_RATIO;
+        const footerHeight = canvas.height * FOOTER_RATIO;
+        const centerX = canvas.width / 2;
+        const maxWidth = canvas.width - padding * 2;
+        const quoteAreaTop = padding;
+        const quoteAreaHeight = canvas.height - footerHeight - quoteAreaTop;
+        const quoteAreaCenterY = quoteAreaTop + quoteAreaHeight / 2;
+        
+        const fontSize = calcFontSize(ctx, text, maxWidth, quoteAreaHeight, 'CustomFont');
+        ctx.font = `${fontSize}px CustomFont`;
+        
+        drawTextJustified(ctx, text, centerX, quoteAreaCenterY, maxWidth, fontSize, 'CustomFont');
+        
+        ctx.font = '26px CustomFont';
+        ctx.fillStyle = QUOTE_COLOR;
+        ctx.textAlign = 'center';
+        ctx.fillText(author || 'Seseorang', centerX, canvas.height - footerHeight / 2);
+        
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+        const imageUrl = URL.createObjectURL(blob);
+        
+        return imageUrl;
+        
+    } catch (err) {
+        console.error('Quote Card error:', err);
+        throw new Error(`Gagal membuat Quote Card: ${err.message}`);
     }
 }
 
@@ -321,45 +503,53 @@ async function generateMockup(version) {
             return;
         }
         
+        // Handle QUOTE/REMINDER CARD
+        if (activeFormat.isQuoteCard || activeFormat.id === 'quote') {
+            const textInput = document.querySelector(`#paramForm${prefix} textarea[name="text"], #paramForm${prefix} input[name="text"]`);
+            const authorInput = document.querySelector(`#paramForm${prefix} input[name="author"]`);
+            const bgUrlInput = document.querySelector(`#paramForm${prefix} input[name="bgUrl"]`);
+            const fontUrlInput = document.querySelector(`#paramForm${prefix} input[name="fontUrl"]`);
+            
+            const text = textInput?.value || '';
+            const author = authorInput?.value || 'Seseorang';
+            const bgUrl = bgUrlInput?.value || null;
+            const fontUrl = fontUrlInput?.value || null;
+            
+            if (!text || text.trim() === '') {
+                throw new Error('Teks quote tidak boleh kosong');
+            }
+            
+            const imageUrl = await generateQuoteCard(text, author, bgUrl, fontUrl);
+            
+            resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Quote Card" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/3b82f6?text=Failed+to+load';"/><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
+            
+            const downloadBtn = document.getElementById(`downloadImageBtn${prefix}`);
+            if (downloadBtn) { 
+                const newBtn = downloadBtn.cloneNode(true); 
+                downloadBtn.parentNode.replaceChild(newBtn, downloadBtn); 
+                newBtn.onclick = (e) => { 
+                    e.preventDefault(); 
+                    if (typeof window.downloadImage === 'function') window.downloadImage(imageUrl, `quote_card_${Date.now()}.png`);
+                    else { const a = document.createElement('a'); a.href = imageUrl; a.download = `quote_card_${Date.now()}.png`; a.click(); }
+                }; 
+            }
+            hideGenerateLoading(loadingObj, true, version);
+            if (window.showToast) window.showToast('Quote Card berhasil dibuat!', 'success');
+            return;
+        }
+        
         // Handle REGULAR MOCKUP
         const inputs = document.querySelectorAll(`#paramForm${prefix} input, #paramForm${prefix} textarea`);
         let params = {};
         inputs.forEach(inp => { if (inp.value.trim()) params[inp.name] = encodeURIComponent(inp.value.trim()); });
         
-        const baseUrl = activeFormat.baseUrl || 'https://api.siputzx.my.id';
+        const baseUrl = activeFormat.baseUrl || 'https://api.zenzxz.my.id';
         let apiUrl = `${baseUrl}${activeFormat.endpoint}?`;
         apiUrl += Object.entries(params).map(([k, v]) => `${k}=${v}`).join('&');
         
         console.log('Fetching:', apiUrl);
         
-        let response;
-        
-        // Khusus untuk Tweet Card, coba multiple endpoints
-        if (activeFormat.id === 'tweet') {
-            const altEndpoints = [
-                apiUrl,
-                `https://api.siputzx.my.id/api/canvas/tweet?${new URLSearchParams(params).toString()}`,
-                `https://api.zenzxz.my.id/api/canvas/tweet?${new URLSearchParams(params).toString()}`
-            ];
-            
-            let success = false;
-            for (let i = 0; i < altEndpoints.length; i++) {
-                try {
-                    console.log(`Mencoba endpoint tweet ${i + 1}:`, altEndpoints[i]);
-                    const altResponse = await fetchWithRetry(altEndpoints[i], { method: 'GET' }, 2, 1000);
-                    if (altResponse.ok) {
-                        response = altResponse;
-                        success = true;
-                        break;
-                    }
-                } catch (err) {
-                    console.log(`Endpoint tweet ${i + 1} gagal:`, err.message);
-                }
-            }
-            if (!success) throw new Error('Tweet Card service sedang sibuk, coba lagi nanti');
-        } else {
-            response = await fetchWithRetry(apiUrl, { method: 'GET' }, 3, 1000);
-        }
+        const response = await fetchWithRetry(apiUrl, { method: 'GET' }, 3, 1000);
         
         const contentType = response.headers.get('content-type') || '';
         let imageUrl;

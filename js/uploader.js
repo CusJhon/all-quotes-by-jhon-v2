@@ -51,6 +51,22 @@ function setLoading(btn, statusEl, loading) {
     }
 }
 
+// ==================== UPDATE FILE NAME DISPLAY ====================
+function updateFileName(inputId, nameDisplayId) {
+    const input = document.getElementById(inputId);
+    const display = document.getElementById(nameDisplayId);
+    if (!input || !display) return;
+    
+    input.addEventListener('change', () => {
+        const file = input.files?.[0];
+        if (file) {
+            display.textContent = file.name;
+        } else {
+            display.textContent = 'Tidak ada file yang dipilih';
+        }
+    });
+}
+
 // ==================== PREVIEW BINDING ====================
 function bindPreview(inputId, mediaId, emptyId) {
     const input = document.getElementById(inputId);
@@ -230,6 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
     bindPreview('vidFile', 'vidPreview', 'vidPreviewEmpty');
     bindPreview('audFile', 'audPreview', 'audPreviewEmpty');
     initUploaderTabs();
+    
+    updateFileName('imgFile', 'imgFileName');
+    updateFileName('vidFile', 'vidFileName');
+    updateFileName('audFile', 'audFileName');
 });
 
 window.uploadImg = uploadImg;

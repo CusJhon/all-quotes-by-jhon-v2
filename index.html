@@ -6,6 +6,7 @@
     <title>QuickFake · Mockup & Info Generator</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -45,6 +46,7 @@
                 <div class="nav-menu" id="navMenu">
                     <a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Beranda</a>
                     <a href="#" class="nav-link" data-page="ssweb"><i class="fas fa-camera"></i> SSWeb</a>
+                    <a href="#" class="nav-link" data-page="uploader"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
                     <a href="#" class="nav-link" data-page="info"><i class="fas fa-newspaper"></i> Info & Berita</a>
                     <a href="#" class="nav-link" data-page="howto"><i class="fas fa-book-open"></i> Cara Penggunaan</a>
                     <a href="#" class="nav-link" data-page="guide"><i class="fas fa-compass"></i> Panduan Lengkap</a>
@@ -74,6 +76,113 @@
             <div class="container"><div class="main-card"><div class="format-section"><label><i class="fas fa-camera"></i> Screenshot Website (SSWeb)</label><p style="color:#9ca3af;font-size:0.85rem;margin-top:-0.5rem;">Ambil screenshot dari website apapun secara instan</p></div><div class="param-section"><label><i class="fas fa-sliders-h"></i> Parameter SSWeb</label><div class="param-form" id="sswebParamForm"><div class="input-group"><label>URL Website <span style="color:#ef4444;">*</span></label><input type="url" id="sswebUrl" placeholder="https://example.com" value=""></div><div class="input-group"><label>Perangkat (Device)</label><select id="sswebDevice"><option value="" selected disabled>-- Pilih Perangkat --</option><option value="desktop">Desktop</option><option value="mobile">Mobile</option><option value="tablet">Tablet</option></select></div><div class="input-group"><label>Halaman Penuh (Full Page)</label><select id="sswebFullPage"><option value="" selected disabled>-- Pilih Opsi --</option><option value="penuh">Ya (Penuh)</option><option value="tidak">Tidak (Halaman terlihat)</option></select></div><div class="input-group"><label>Skala (Scale)</label><select id="sswebScale"><option value="" selected disabled>-- Pilih Skala --</option><option value="1">1x (Normal)</option><option value="2">2x (HD)</option><option value="3">3x (Ultra HD)</option></select></div></div></div><div class="action-section"><button id="sswebGenerateBtn" class="btn-generate"><i class="fas fa-camera"></i> Ambil Screenshot</button><div id="sswebLoading" class="generate-loading hidden"><div class="loading-spinner"><div class="spinner-ring"></div><div class="spinner-ring"></div><div class="spinner-ring"></div></div><div class="loading-message" id="sswebLoadingMessage"><i class="fas fa-globe"></i> Menghubungkan ke server...</div><div class="loading-progress"><div class="loading-progress-bar"><div class="loading-progress-fill" id="sswebProgressFill"></div></div><span id="sswebProgressPercent">0</span>%</div></div><div id="sswebResultArea" class="result-area"><div class="result-placeholder"><i class="fas fa-camera"></i><p>Screenshot website akan tampil di sini</p></div></div></div></div></div>
         </div>
 
+        <!-- PAGE: UPLOADER (FILE UPLOAD) -->
+        <div id="uploaderPage" class="page-container">
+            <div class="container">
+                <div class="main-card">
+                    <div class="format-section">
+                        <label><i class="fas fa-cloud-upload-alt"></i> File Uploader</label>
+                        <p style="color:#9ca3af;font-size:0.85rem;margin-top:-0.5rem;">Upload gambar, video, atau audio ke cloud (ImgBB & Cloudinary)</p>
+                    </div>
+                    
+                    <!-- TABS UNTUK UPLOADER -->
+                    <div class="uploader-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <button class="uploader-tab-btn active" data-uploader="img"><i class="fas fa-image"></i> Img to URL</button>
+                        <button class="uploader-tab-btn" data-uploader="vid"><i class="fas fa-video"></i> Vid to URL</button>
+                        <button class="uploader-tab-btn" data-uploader="aud"><i class="fas fa-music"></i> Aud to URL</button>
+                    </div>
+                    
+                    <!-- IMG UPLOADER -->
+                    <div id="uploaderImg" class="uploader-section active-uploader">
+                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="input-group">
+                                    <label><i class="fas fa-file-image"></i> Pilih Gambar</label>
+                                    <input id="imgFile" type="file" accept="image/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                </div>
+                                <button id="imgUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadImg && uploadImg()"><i class="fas fa-upload"></i> Upload ke ImgBB</button>
+                                <div id="imgStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
+                                <div class="input-group" style="margin-top:16px;">
+                                    <label><i class="fas fa-link"></i> Hasil URL</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input id="imgUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('imgUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
+                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
+                                    <img id="imgPreview" style="max-width:100%; border-radius:12px; display:none;" alt="preview">
+                                    <div id="imgPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-image"></i> Belum ada gambar dipilih.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VID UPLOADER -->
+                    <div id="uploaderVid" class="uploader-section" style="display:none;">
+                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="input-group">
+                                    <label><i class="fas fa-file-video"></i> Pilih Video</label>
+                                    <input id="vidFile" type="file" accept="video/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                </div>
+                                <button id="vidUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadVid && uploadVid()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
+                                <div id="vidStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
+                                <div class="input-group" style="margin-top:16px;">
+                                    <label><i class="fas fa-link"></i> Hasil URL</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input id="vidUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('vidUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
+                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
+                                    <video id="vidPreview" style="max-width:100%; border-radius:12px; display:none;" controls></video>
+                                    <div id="vidPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-video"></i> Belum ada video dipilih.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AUD UPLOADER -->
+                    <div id="uploaderAud" class="uploader-section" style="display:none;">
+                        <div class="tool-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="input-group">
+                                    <label><i class="fas fa-file-audio"></i> Pilih Audio</label>
+                                    <input id="audFile" type="file" accept="audio/*" style="width:100%; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                </div>
+                                <button id="audUploadBtn" class="btn-generate" style="margin-top:12px;" onclick="window.uploadAud && uploadAud()"><i class="fas fa-upload"></i> Upload ke Cloudinary</button>
+                                <div id="audStatus" class="tool-status" style="margin-top:10px; color:#9ca3af;"></div>
+                                <div class="input-group" style="margin-top:16px;">
+                                    <label><i class="fas fa-link"></i> Hasil URL</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input id="audUrl" type="text" readonly placeholder="URL akan muncul di sini" style="flex:1; padding:12px; border-radius:12px; background:#11171f; border:1px solid #2d3748; color:white;">
+                                        <button class="btn-generate" style="width:auto; padding:12px 20px;" onclick="window.copyUrl && copyUrl('audUrl')"><i class="fas fa-copy"></i> Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border:1px dashed rgba(148,163,184,0.45); border-radius:14px; padding:14px;">
+                                    <div style="font-weight:600; margin-bottom:10px;"><i class="fas fa-eye"></i> Preview</div>
+                                    <audio id="audPreview" style="max-width:100%; border-radius:12px; display:none;" controls></audio>
+                                    <div id="audPreviewEmpty" style="color:#9ca3af;"><i class="fas fa-music"></i> Belum ada audio dipilih.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <footer style="margin-top: 2rem; text-align: center; font-size:0.8rem; color:#6c757d;">
+                        <p>⚡ Powered by ImgBB & Cloudinary • Hasil upload berupa URL permanen</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
         <!-- PAGE: INFO & BERITA -->
         <div id="infoPage" class="page-container">
             <div class="container"><div class="main-card"><div class="format-section"><label><i class="fas fa-newspaper"></i> Info & Berita Terkini</label><p style="color:#9ca3af;font-size:0.85rem;margin-top:-0.5rem;">Dapatkan informasi berita, gempa, cuaca, dan jadwal TV terkini</p></div>
@@ -87,28 +196,26 @@
 
         <!-- PAGE: CARA PENGGUNAAN -->
         <div id="howtoPage" class="page-container">
-            <div class="container"><div class="content-card"><div class="content-header"><i class="fas fa-book-open"></i><h2>Cara Penggunaan QuickFake</h2><p>Ikuti langkah mudah berikut</p></div><div class="steps-grid"><div class="step-card"><div class="step-number">01</div><div class="step-icon"><i class="fas fa-layer-group"></i></div><h3>Pilih Layanan</h3><p>Pilih Mockup Generator v1/v2, SSWeb, atau Info & Berita</p></div><div class="step-card"><div class="step-number">02</div><div class="step-icon"><i class="fas fa-sliders-h"></i></div><h3>Isi Parameter</h3><p>Masukkan data sesuai layanan yang dipilih</p></div><div class="step-card"><div class="step-number">03</div><div class="step-icon"><i class="fas fa-magic"></i></div><h3>Generate</h3><p>Klik tombol Generate dan tunggu prosesnya</p></div><div class="step-card"><div class="step-number">04</div><div class="step-icon"><i class="fas fa-download"></i></div><h3>Download</h3><p>Hasil akan tampil, klik Download untuk menyimpan</p></div></div><div class="tips-section"><h3><i class="fas fa-lightbulb"></i> Tips</h3><ul><li><strong>Info & Berita:</strong> 8 sumber berita, cek gempa BMKG, prakiraan cuaca, dan jadwal TV 12 channel</li><li><strong>Mockup v1:</strong> Untuk Fake Call, durasi bisa diisi format seperti "19:31" atau "2:45"</li><li>Untuk format media sosial, isi angka like/comment dengan format numerik biasa<li>Semua hasil generate bersifat real-time dan langsung bisa didownload</li><li>Jika download tidak berjalan, klik kanan pada gambar lalu pilih "Save image as..."</li><li><strong>SSWeb:</strong> Gunakan skala 2x atau 3x untuk hasil HD</li><li><strong>SSWeb:</strong> Pilih "Halaman Penuh: Ya" untuk screenshot seluruh halaman</li> <li>Gunakan URL gambar dari hosting gratis untuk mockup</li></ul></div></div></div>
+            <div class="container"><div class="content-card"><div class="content-header"><i class="fas fa-book-open"></i><h2>Cara Penggunaan QuickFake</h2><p>Ikuti langkah mudah berikut</p></div><div class="steps-grid"><div class="step-card"><div class="step-number">01</div><div class="step-icon"><i class="fas fa-layer-group"></i></div><h3>Pilih Layanan</h3><p>Pilih Mockup Generator v1/v2, SSWeb, Uploader, atau Info & Berita</p></div><div class="step-card"><div class="step-number">02</div><div class="step-icon"><i class="fas fa-sliders-h"></i></div><h3>Isi Parameter</h3><p>Masukkan data sesuai layanan yang dipilih</p></div><div class="step-card"><div class="step-number">03</div><div class="step-icon"><i class="fas fa-magic"></i></div><h3>Generate/Upload</h3><p>Klik tombol Generate atau Upload dan tunggu prosesnya</p></div><div class="step-card"><div class="step-number">04</div><div class="step-icon"><i class="fas fa-download"></i></div><h3>Download/Copy URL</h3><p>Hasil akan tampil, klik Download atau Copy URL untuk menyimpan</p></div></div><div class="tips-section"><h3><i class="fas fa-lightbulb"></i> Tips</h3><ul><li><strong>Info & Berita:</strong> 8 sumber berita, cek gempa BMKG, prakiraan cuaca, dan jadwal TV 12 channel</li><li><strong>Mockup v1:</strong> Untuk Fake Call, durasi bisa diisi format seperti "19:31" atau "2:45"</li><li><strong>Uploader:</strong> Upload gambar via ImgBB, video/audio via Cloudinary</li><li>Untuk format media sosial, isi angka like/comment dengan format numerik biasa<li>Semua hasil generate bersifat real-time dan langsung bisa didownload</li><li>Jika download tidak berjalan, klik kanan pada gambar lalu pilih "Save image as..."</li><li><strong>SSWeb:</strong> Gunakan skala 2x atau 3x untuk hasil HD</li><li><strong>SSWeb:</strong> Pilih "Halaman Penuh: Ya" untuk screenshot seluruh halaman</li> <li>Gunakan URL gambar dari hosting gratis untuk mockup</li></ul></div></div></div>
         </div>
 
         <!-- PAGE: PANDUAN LENGKAP -->
         <div id="guidePage" class="page-container">
             <div class="container"><div class="content-card"><div class="content-header"><i class="fas fa-compass"></i><h2>Panduan Lengkap</h2><p>Penjelasan detail setiap fitur</p></div>
-             <div class="guide-section"><h3><i class="fas fa-font"></i> Brat Text</h3><p>Membuat teks dengan gaya aesthetic ala Brat. Cukup masukkan teks apapun, dan sistem akan menghasilkan gambar dengan typography keren dan efek gradien modern.</p><div class="guide-example">Contoh:</strong> Text: "Halo semesta!" → Hasil teks dengan gaya bold dan warna gradien</div></div>
-             <div class="guide-section"><h3><i class="fas fa-phone-alt"></i> Fake Call</h3><p>Simulasi tampilan panggilan masuk dengan avatar custom. Cocok untuk konten storytelling, meme, atau konten lucu.</p><div class="guide-example">Parameter:</strong> Nama penelepon, Durasi panggilan, URL Avatar (opsional)</div></div>
-             <div class="guide-section"><h3><i class="fab fa-youtube"></i> Fake Channel</h3><p>Membuat tampilan channel YouTube dengan thumbnail, nama channel, jumlah subscriber, deskripsi, dan tanggal.</p><div class="guide-example">Parameter:</strong> URL Gambar, Nama Channel, Followers, Deskripsi, Tanggal</div></div>
-             <div class="guide-section"><h3><i class="fas fa-wallet"></i> Fake DANA</h3><p>Simulasi tampilan saldo DANA untuk keperluan kreatif, promosi, atau konten edukasi.</p><div class="guide-example">Parameter:</strong> Nominal (contoh: Rp 100.000)</div></div>
-              <div class="guide-section"><h3><i class="fab fa-facebook"></i> FB Comment</h3><p>Komentar Facebook dengan nama, komentar, dan foto profil custom.</p><div class="guide-example">Parameter:</strong> Nama, Komentar, URL Foto Profil</div></div>
-              <div class="guide-section"><h3><i class="fab fa-whatsapp"></i> WA Group & WA Group V2</h3><p>Membuat screenshot grup WhatsApp dengan berbagai variasi. V2 memiliki tampilan lebih modern dengan info member detail dan author.</p><div class="guide-example">Parameter:</strong> URL Icon, Judul, Jumlah Pesan, Waktu<br><strong>Parameter V2:</strong> URL Avatar, Nama Admin, Jumlah Member, Deskripsi, Author, Tanggal</div></div>
-              <div class="guide-section"><h3><i class="fab fa-instagram"></i> IG Post</h3><p>Mockup postingan Instagram dengan like, comment, share, repost, dan caption. Bisa custom avatar dan konten.</p><div class="guide-example">Parameter:</strong> Avatar URL, Konten URL, Username, Likes, Comments, Share, Repost, Date, Caption</div></div>
-              <div class="guide-section"><h3><i class="fab fa-tiktok"></i> TikTok Profile & TikTok Comment</h3><p>Simulasi profil TikTok dengan informasi following, followers, likes, dan komentar dengan tampilan autentik.</p><div class="guide-example">Parameter:</strong> Nama, Username, Following, Followers, Likes, URL Foto<br><strong>Comment:</strong> URL Foto, Username, Komentar, Tanggal</div></div>
-              <div class="guide-section"><h3><i class="fab fa-youtube"></i> YouTube Community</h3><p>Postingan komunitas YouTube dengan like dan comment count. Cocok untuk simulasi konten viral.</p><div class="guide-example">Parameter:</strong> Avatar URL, Konten URL, Username, Deskripsi, Like, Comment</div></div>
-            <div class="guide-section"><h3><i class="fas fa-door-open"></i> Goodbye V1</h3><p>Untuk menghasilkan gambar "perpisahan" (versi 1) melalui parameter URL, gunakan generator berbasis API seperti skrip khusus untuk menentukan teks, gambar, dan tata letak secara dinamis.</p><div class="guide-example"> Parameter:</strong>Username, Nama Guild, URL Icon Guild, Jumlah Member, URL Avatar, URL Background, Kualitas (1-100)<br><strong>Contoh:</strong> username: "Jhone", guild_name: "Gamer Elite", url_Icon_guild: "https://i.ibb.co/G5mJZxs/rin.jpg", member_count: "5000", url_avatar: "https://i.ibb.co/1s8T3sY/48f7ce63c7aa.jpg", url_background: "https://i.ibb.co/4YBNyvP/images-76.jpg", quality: "100"</div></div>
-            <div class="guide-section"><h3><i class="fab fa-spotify"></i> Spotify Card</h3><p>Untuk membuat kartu "sedang diputar" ala Spotify menggunakan parameter URL, Anda dapat menggunakan layanan web khusus yang mengambil data pendengaran Anda secara real-time dan menghasilkan gambar SVG yang dapat disesuaikan. Layanan ini sering digunakan untuk file README GitHub atau portofolio pribadi.</p><div class="guide-example"> Parameter:</strong>Judul Lagu, Artis, Waktu Mulai (ms), Waktu Akhir (ms), URL Gambar, Warna Border<br><strong>Contoh:</strong>  title: "Blinding Lights", artist: "The Weeknd", waktu_mulai: "100000", waktu_akhir: "200000", url_gambar "https://i.ibb.co/1s8T3sY/48f7ce63c7aa.jpg", border_color: "#1DB954"</div></div>
-            <div class="guide-section"><h3><i class="fas fa-shield-alt"></i> Captcha Image</h3><p>Untuk membuat kartu "sedang diputar" ala Spotify menggunakan parameter URL, Anda dapat menggunakan layanan web khusus yang mengambil data pendengaran Anda secara real-time dan menghasilkan gambar SVG yang dapat disesuaikan. Layanan ini sering digunakan untuk file README GitHub atau portofolio pribadi.</p><div class="guide-example"> Parameter:</strong>URL Avatar, URL Background, Kode Captcha, Warna Border, overlay<br><strong>Contoh:</strong>  url_background: "(https://i.ibb.co/4YBNyvP/images-76.jpg)", capt_chaKey: "(isi bebas)", warna_border: "(#1DB954)", opacity_overlay "(0.5)"</div></div>
-            <div class="guide-section"><h3><i class="fas fa-lock"></i> Security Card</h3><p>Untuk membuat kartu tersangka keamanan menggunakan parameter URL, Anda dapat membuat struktur URL dinamis yang memasukkan data ke dalam templat, yang sering digunakan di pusat operasi keamanan (SOC), dasbor respons insiden, atau alat forensik untuk menampilkan informasi tentang pengguna, IP, atau URL yang mencurigakan.</p><div class="guide-example"> Parameter:</strong>URL Avatar, URL Background, Created Timestamp, Suspect Timestamp, locale<br><strong>Contoh:</strong>  url_avatar: "(https://i.ibb.co/1s8T3sY/48f7ce63c7aa.jpg)", url_background: "(https://i.ibb.co/4YBNyvP/images-76.jpg)", created_timestamp: "(1672531200000)", suspect_timestamp: "(604800000)", locale "(en)"</div></div>
-        <div class="guide-section"><h3><i class="fas fa-text-height"></i> TextPro</h3><p>platform populer untuk membuat efek teks, platform ini tidak secara resmi mendukung pembuatan gambar melalui parameter URL sederhana Untuk menggunakannya, Anda biasanya perlu mengunjungi halaman efek tertentu, mengetik teks Anda ke dalam kotak input, dan mengklik Go.</p><div class="guide-example"> Parameter:</strong>Url, Teks<br><strong>Contoh:</strong>  url: "(https://textpro.me/create-artistic-3d-text-effects-from-corn-kernels-1177.html)", teks: "(BEBAS ISI)"</div></div>
-        <div class="guide-section"><h3><i class="fas fa-camera"></i> PhotoOxy</h3><p>Untuk membuat gambar kustom menggunakan efek PhotoOxy , Anda biasanya perlu mengunjungi situs web mereka dan menggunakan editor interaktif. Meskipun tidak ada API publik resmi untuk menghasilkan efek ini melalui URL sederhana, Anda dapat menjelajahi ratusan efek secara manual di beberapa kategori.</p><div class="guide-example"> Parameter:</strong>Url, Teks<br><strong>Contoh:</strong>  url: "(https://photooxy.com/logo-and-text-effects/shadow-text-effect-in-the-sky-394.html)", teks: "(BEBAS ISI)"</div></div>
-            <div class="guide-section"><h3><i class="fas fa-palette"></i> Ephoto360</h3><p>Untuk menghasilkan gambar kustom, Anda umumnya perlu berinteraksi dengan antarmuka web mereka atau menggunakan alat API khusus. Meskipun situs tersebut tidak menawarkan metode "parameter URL langsung" yang sederhana untuk pengguna akhir.</p><div class="guide-example"> Parameter:</strong>Url, Teks<br><strong>Contoh:</strong>  url: "(https://en.ephoto360.com/create-a-cartoon-style-graffiti-text-effect-online-668.html)", teks: "(BEBAS ISI)"</div></div>
+             <div class="guide-section"><h3><i class="fas fa-font"></i> Brat Text</h3><p>Membuat teks dengan gaya aesthetic ala Brat. Cukup masukkan teks apapun, dan sistem akan menghasilkan gambar dengan typography keren dan efek gradien modern.</p><div class="guide-example">Contoh: Text: "Halo semesta!" → Hasil teks dengan gaya bold dan warna gradien</div></div>
+             <div class="guide-section"><h3><i class="fas fa-phone-alt"></i> Fake Call</h3><p>Simulasi tampilan panggilan masuk dengan avatar custom. Cocok untuk konten storytelling, meme, atau konten lucu.</p><div class="guide-example">Parameter: Nama penelepon, Durasi panggilan, URL Avatar (opsional)</div></div>
+             <div class="guide-section"><h3><i class="fab fa-youtube"></i> Fake Channel</h3><p>Membuat tampilan channel YouTube dengan thumbnail, nama channel, jumlah subscriber, deskripsi, dan tanggal.</p><div class="guide-example">Parameter: URL Gambar, Nama Channel, Followers, Deskripsi, Tanggal</div></div>
+             <div class="guide-section"><h3><i class="fas fa-wallet"></i> Fake DANA</h3><p>Simulasi tampilan saldo DANA untuk keperluan kreatif, promosi, atau konten edukasi.</p><div class="guide-example">Parameter: Nominal (contoh: Rp 100.000)</div></div>
+              <div class="guide-section"><h3><i class="fab fa-facebook"></i> FB Comment</h3><p>Komentar Facebook dengan nama, komentar, dan foto profil custom.</p><div class="guide-example">Parameter: Nama, Komentar, URL Foto Profil</div></div>
+              <div class="guide-section"><h3><i class="fab fa-whatsapp"></i> WA Group & WA Group V2</h3><p>Membuat screenshot grup WhatsApp dengan berbagai variasi. V2 memiliki tampilan lebih modern dengan info member detail dan author.</p><div class="guide-example">Parameter: URL Icon, Judul, Jumlah Pesan, Waktu<br><strong>Parameter V2:</strong> URL Avatar, Nama Admin, Jumlah Member, Deskripsi, Author, Tanggal</div></div>
+              <div class="guide-section"><h3><i class="fab fa-instagram"></i> IG Post</h3><p>Mockup postingan Instagram dengan like, comment, share, repost, dan caption. Bisa custom avatar dan konten.</p><div class="guide-example">Parameter: Avatar URL, Konten URL, Username, Likes, Comments, Share, Repost, Date, Caption</div></div>
+              <div class="guide-section"><h3><i class="fab fa-tiktok"></i> TikTok Profile & TikTok Comment</h3><p>Simulasi profil TikTok dengan informasi following, followers, likes, dan komentar dengan tampilan autentik.</p><div class="guide-example">Parameter: Nama, Username, Following, Followers, Likes, URL Foto<br><strong>Comment:</strong> URL Foto, Username, Komentar, Tanggal</div></div>
+              <div class="guide-section"><h3><i class="fab fa-youtube"></i> YouTube Community</h3><p>Postingan komunitas YouTube dengan like dan comment count. Cocok untuk simulasi konten viral.</p><div class="guide-example">Parameter: Avatar URL, Konten URL, Username, Deskripsi, Like, Comment</div></div>
+            <div class="guide-section"><h3><i class="fas fa-door-open"></i> Goodbye V1</h3><p>Untuk menghasilkan gambar "perpisahan" (versi 1) melalui parameter URL, gunakan generator berbasis API seperti skrip khusus untuk menentukan teks, gambar, dan tata letak secara dinamis.</p><div class="guide-example">Parameter: Username, Nama Guild, URL Icon Guild, Jumlah Member, URL Avatar, URL Background, Kualitas (1-100)</div></div>
+            <div class="guide-section"><h3><i class="fab fa-spotify"></i> Spotify Card</h3><p>Untuk membuat kartu "sedang diputar" ala Spotify menggunakan parameter URL.</p><div class="guide-example">Parameter: Judul Lagu, Artis, Waktu Mulai (ms), Waktu Akhir (ms), URL Gambar, Warna Border</div></div>
+            <div class="guide-section"><h3><i class="fas fa-shield-alt"></i> Captcha Image</h3><p>Membuat gambar captcha custom dengan background dan kode captcha.</p><div class="guide-example">Parameter: URL Avatar, URL Background, Kode Captcha, Warna Border, overlay</div></div>
+            <div class="guide-section"><h3><i class="fas fa-lock"></i> Security Card</h3><p>Membuat kartu tersangka keamanan untuk keperluan forensik atau SOC.</p><div class="guide-example">Parameter: URL Avatar, URL Background, Created Timestamp, Suspect Timestamp, locale</div></div>
+            <div class="guide-section"><h3><i class="fas fa-cloud-upload-alt"></i> Uploader</h3><p>Fitur upload file ke cloud: gambar via ImgBB, video/audio via Cloudinary. Hasil upload berupa URL permanen yang bisa langsung disalin.</p><div class="guide-example">Cara: Pilih file gambar/video/audio, klik Upload, tunggu proses, copy URL yang dihasilkan.</div></div>
             <div class="tips-section" style="margin-top: 2rem;">
                         <h3><i class="fas fa-info-circle"></i> Informasi Penting</h3>
                         <ul>
@@ -116,6 +223,7 @@
                             <li>Gunakan URL gambar yang valid (pastikan gambar dapat diakses publik)</li>
                             <li>Website ini gratis dan hanya untuk keperluan kreatif & edukasi</li>
                             <li>Hasil generate dapat digunakan untuk konten media sosial, presentasi, atau desain</li>
+                            <li>Uploader menggunakan ImgBB untuk gambar dan Cloudinary untuk video/audio</li>
                         </ul>
                     </div>
                 </div>
@@ -134,15 +242,7 @@ Penjelasan lengkap QuickFake merujuk pada:
 • Gambar, video, atau audio palsu
 • Dibuat dalam waktu singkat
 • Menggunakan teknologi seperti AI
-• Sering dipakai untuk hiburan, prank, atau bahkan hoaks
-
-Contoh:
-• Foto editan wajah seseorang dalam situasi yang tidak pernah terjadi
-• Video singkat manipulasi ekspresi wajah
-• Suara tiruan seseorang yang dibuat cepat
-
-Kesimpulan:
-QuickFake adalah konten manipulasi digital yang dibuat secara instan atau cepat, biasanya menggunakan bantuan teknologi AI atau aplikasi editing modern.</code></pre></div></div>
+• Sering dipakai untuk hiburan, prank, atau bahkan hoaks</code></pre></div></div>
             <div class="docs-section"><h3><i class="fas fa-folder-tree"></i> Base URL & Endpoint API</h3><div class="code-block"><pre><code>
 BERITA:
 • /api/berita/cnbcindonesia
@@ -160,50 +260,44 @@ JADWAL TV: /api/info/jadwaltv?channel=sctv
 
 MAKER ENDPOINTS:
 • /maker/brat
-• /maker/glitch
-• /maker/goodbye
-• /maker/spotify
-• /maker/captcha
-• /maker/security
-• /maker/textpro
-• /maker/photooxy</code></pre></div></div>
+• /maker/fakecall
+• /maker/fakechannel
+• /maker/fakedanav2
+• /maker/fakefbcomment
+• /maker/fakegroup
+• /maker/fakegroupv2
+• /maker/fakeigpost
+• /maker/faketiktok
+• /maker/fakettcomment
+• /maker/fakeytcomunity
+
+UPLOADER:
+• ImgBB API: https://api.imgbb.com/1/upload
+• Cloudinary: https://api.cloudinary.com/v1_1/{cloud_name}/video/upload</code></pre></div></div>
             <div class="docs-section"><h3><i class="fas fa-folder-tree"></i> Struktur File</h3><div class="code-block"><pre><code>QuickFake/
 ├── index.html      # Halaman utama & struktur DOM
-├── style.css       # Styling modern & responsive
-├── script.js       # Logika frontend & API handler
+├── css/
+│   └── style.css   # Styling modern & responsive
+├── js/
+│   ├── script.js   # Logika frontend & API handler
+│   ├── download.js # Fungsi download gambar
+│   └── uploader.js # Fungsi upload file
 └── api/
-    └── generate.js # Backend proxy (opsional)
-    └── download.js     # Fungsi download gambar</code></pre></div></div>
-            <div class="docs-section"><h3><i class="fas fa-cogs"></i> Fungsi Utama (script.js)</h3>
+    └── generate.js # Backend proxy (opsional)</code></pre></div></div>
+            <div class="docs-section"><h3><i class="fas fa-cogs"></i> Fungsi Utama</h3>
                 <table class="docs-table">
-                    <thead>
-                        <tr><th>Fungsi</th><th>Deskripsi</th></tr>
-                    </thead>
+                    <thead><tr><th>Fungsi</th><th>Deskripsi</th></tr></thead>
                     <tbody>
-                        <tr><td><code>renderFormatGrid()</code></td><td>Menampilkan daftar format mockup yang tersedia</td></tr>
-                        <tr><td><code>renderParamForm()</code></td><td>Membuat form parameter dinamis sesuai format terpilih</td></tr>
-                        <tr><td><code>generateMockup()</code></td><td>Memanggil API, menampilkan loading real-time, dan menampilkan hasil</td></tr>
-                        <tr><td><code>showGenerateLoading()</code></td><td>Menampilkan animasi loading dengan progress bar real-time</td></tr>
-                        <tr><td><code>hideGenerateLoading()</code></td><td>Menyembunyikan loading dan mengembalikan tombol generate</td></tr>
-                        <tr><td><code>initSplashScreen()</code></td><td>Menampilkan splash screen dengan animasi progress</td></tr>
-                        <tr><td><code>initNavigation()</code></td><td>Menginisialisasi navigasi navbar antar halaman</td></tr>
-                        <tr><td><code>fetchBerita()</code></td><td>Mengambil berita dari API berdasarkan sumber</td></tr>
-                        <tr><td><code>fetchGempa()</code></td><td>Mengambil data gempa terkini dari BMKG</td></tr>
-                        <tr><td><code>fetchCuaca()</code></td><td>Mengambil prakiraan cuaca berdasarkan kota</td></tr>
-                        <tr><td><code>fetchJadwalTV()</code></td><td>Mengambil jadwal acara TV dari channel tertentu</td></tr>
-                        <tr><td><code>captureScreenshot()</code></td><td>Mengambil screenshot website dengan parameter yang dipilih</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="docs-section"><h3><i class="fas fa-download"></i> Fungsi Download (download.js)</h3>
-                <table class="docs-table">
-                    <thead>
-                        <tr><th>Fungsi</th><th>Deskripsi</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><code>downloadImage(url, filename)</code></td><td>Download gambar langsung ke perangkat tanpa membuka tab baru</td></tr>
-                        <tr><td><code>createToast(message, type)</code></td><td>Menampilkan notifikasi toast dengan animasi progress bar</td></tr>
-                        <tr><td><code>downloadViaIframe(url)</code></td><td>Metode alternatif download menggunakan iframe</td></tr>
+                        <tr><td><code>renderFormatGrid()</code></td><td>Menampilkan daftar format mockup</td></tr>
+                        <tr><td><code>generateMockup()</code></td><td>Memanggil API dan menampilkan hasil</td></tr>
+                        <tr><td><code>uploadImg()</code></td><td>Upload gambar ke ImgBB</td></tr>
+                        <tr><td><code>uploadVid()</code></td><td>Upload video ke Cloudinary</td></tr>
+                        <tr><td><code>uploadAud()</code></td><td>Upload audio ke Cloudinary</td></tr>
+                        <tr><td><code>generateSSWeb()</code></td><td>Screenshot website</td></tr>
+                        <tr><td><code>loadBerita()</code></td><td>Mengambil berita dari API</td></tr>
+                        <tr><td><code>loadGempaData()</code></td><td>Mengambil data gempa BMKG</td></tr>
+                        <tr><td><code>loadCuaca()</code></td><td>Mengambil prakiraan cuaca</td></tr>
+                        <tr><td><code>loadJadwalTV()</code></td><td>Mengambil jadwal TV</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -214,32 +308,17 @@ MAKER ENDPOINTS:
                     <span class="tech-tag">JavaScript ES6+</span>
                     <span class="tech-tag">Fetch API</span>
                     <span class="tech-tag">Font Awesome 6</span>
-                    <span class="tech-tag">Google Fonts (Inter)</span>
+                    <span class="tech-tag">Google Fonts</span>
                     <span class="tech-tag">CSS Animations</span>
                     <span class="tech-tag">Backdrop Filter</span>
                     <span class="tech-tag">LocalStorage</span>
+                    <span class="tech-tag">ImgBB API</span>
+                    <span class="tech-tag">Cloudinary API</span>
                 </div>
             </div>
             <div class="docs-section"><h3><i class="fas fa-rocket"></i> Kontribusi & Pengembangan</h3>
-                <div class="code-block"><pre><code>QuickFake bersifat eksperimental, kolaboratif, iteratif, aksesibel, dan fleksibel, sehingga mempercepat inovasi—namun tetap harus digunakan secara bertanggung jawab:</p>
-                <ul style="margin: 1rem 0 0 1.5rem;">
-                    <li>Menambahkan format mockup baru dengan menambahkan object di array <code>formats</code> di script.js</li>
-                    <li>Mengustomisasi tampilan di file <code>style.css</code></li>
-                    <li>Menambahkan fitur export ke format lain (PDF, PNG, dll)</li>
-                    <li>Menambahkan fitur share langsung ke media sosial</li>
-                </ul>
-                </code></pre></div>
+                <div class="code-block"><pre><code>QuickFake bersifat eksperimental, kolaboratif, iteratif, aksesibel, dan fleksibel.</code></pre></div>
                 <p style="margin-top: 1rem; padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 1rem; border-left: 4px solid #ef4444;"><strong>⚠️ Disclaimer:</strong> Gunakan Website Ini secara bijaksana. Tidak untuk menipu atau pun lain. Dev - JHON PRODUCTION Tidak Bertanggung Jawab Jika Di Salah Gunakan. Website Ini Hanya untuk Edukasi. Terimakasih.</p>
-            </div>
-            <div class="docs-section"><h3><i class="fas fa-code-branch"></i> Format Data (formats array)</h3>
-                <div class="code-block"><pre><code>{
-    id: 'brat',
-    name: 'Brat Text',
-    icon: 'fas fa-font',
-    endpoint: '/maker/brat',
-    params: [{ name: 'text', label: 'Teks', type: 'text', placeholder: '...' }]
-}</code></pre></div>
-                <p style="margin-top: 0.8rem;">Setiap format memiliki struktur yang sama dengan properti: <code>id</code>, <code>name</code>, <code>icon</code>, <code>endpoint</code>, dan <code>params</code> (array parameter).</p>
             </div>
             </div></div>
         </div>
@@ -247,5 +326,6 @@ MAKER ENDPOINTS:
 
     <script src="js/script.js"></script>
     <script src="js/download.js"></script>
+    <script src="js/uploader.js"></script>
 </body>
 </html>

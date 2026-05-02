@@ -458,8 +458,88 @@ function renderFormatGrid(prefix, formats, activeFormat, setActive) {
 function renderParamForm(prefix, activeFormat) {
     const container = document.getElementById(`paramForm${prefix}`);
     if (!container) return;
-    if (!activeFormat.params?.length) { container.innerHTML = '<div class="input-group"><p style="color:#9ca3af;">✨ Random Image - Klik Generate untuk mendapatkan gambar acak</p></div>'; return; }
-    container.innerHTML = activeFormat.params.map(p => `<div class="input-group"><label>${p.label}</label>${p.type === 'textarea' ? `<textarea name="${p.name}" rows="3" placeholder="${p.placeholder || ''}"></textarea>` : `<input type="${p.type}" name="${p.name}" placeholder="${p.placeholder || ''}" />`}</div>`).join('');
+    if (!activeFormat.params?.length) { 
+        container.innerHTML = '<div class="input-group"><p style="color:#9ca3af;">✨ Random Image - Klik Generate untuk mendapatkan gambar acak</p></div>'; 
+        return; 
+    }
+    
+    // Buat form parameters
+    let html = activeFormat.params.map(p => `<div class="input-group"><label>${p.label}</label>${p.type === 'textarea' ? `<textarea name="${p.name}" rows="3" placeholder="${p.placeholder || ''}"></textarea>` : `<input type="${p.type}" name="${p.name}" placeholder="${p.placeholder || ''}" />`}</div>`).join('');
+    
+    // Tambahkan tips khusus untuk format tertentu
+    if (activeFormat.id === 'quote') {
+        html += `
+            <div class="tips-form">
+                <i class="fas fa-lightbulb"></i> 
+                <strong>✨ Tips:</strong> 
+                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Ambil URL Background di Panduan lengkap</a>
+                <span style="color:#9ca3af;"> • Gunakan [kurung siku] untuk highlight teks</span>
+            </div>
+        `;
+    }
+    
+    if (activeFormat.id === 'textpro') {
+        html += `
+            <div class="tips-form">
+                <i class="fas fa-lightbulb"></i> 
+                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
+                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL TextPro</a>
+            </div>
+        `;
+    }
+    
+    if (activeFormat.id === 'photooxy') {
+        html += `
+            <div class="tips-form">
+                <i class="fas fa-lightbulb"></i> 
+                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
+                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL PhotoOxy</a>
+            </div>
+        `;
+    }
+    
+    if (activeFormat.id === 'ephoto360') {
+        html += `
+            <div class="tips-form">
+                <i class="fas fa-lightbulb"></i> 
+                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
+                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL Ephoto360</a>
+            </div>
+        `;
+    }
+    
+    // Tambahkan tips untuk format yang membutuhkan URL gambar
+    const urlParams = ['image', 'avatar', 'background', 'bgUrl', 'avatar1', 'avatar2', 'image1', 'image2', 'url'];
+    const hasUrlParam = activeFormat.params.some(p => urlParams.includes(p.name));
+    if (hasUrlParam && activeFormat.id !== 'quote' && activeFormat.id !== 'textpro' && activeFormat.id !== 'photooxy' && activeFormat.id !== 'ephoto360') {
+        html += `
+            <div class="tips-form">
+                <i class="fas fa-lightbulb"></i> 
+                <strong>✨ Tips:</strong> 
+                <a href="#" onclick="showUploaderPage()" style="color:#3b82f6; text-decoration:none;">Upload gambar dulu di menu Uploader</a>
+                <span style="color:#9ca3af;"> untuk mendapatkan URL, lalu paste di sini</span>
+            </div>
+        `;
+    }
+    
+    container.innerHTML = html;
+}
+
+// ========== FUNGSI NAVIGASI KE HALAMAN LAIN ==========
+function showGuidePage() {
+    // Cari dan klik link Guide di navbar
+    const guideLink = document.querySelector('.nav-link[data-page="guide"]');
+    if (guideLink) {
+        guideLink.click();
+    }
+}
+
+function showUploaderPage() {
+    // Cari dan klik link Uploader di navbar
+    const uploaderLink = document.querySelector('.nav-link[data-page="uploader"]');
+    if (uploaderLink) {
+        uploaderLink.click();
+    }
 }
 
 async function generateMockup(version) {

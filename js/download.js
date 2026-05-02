@@ -5,7 +5,7 @@ async function downloadImage(imageUrl, filename = 'screenshot.png') {
         if (window.showToast) window.showToast('⏳ Mengunduh gambar...', 'info');
         if (!imageUrl) throw new Error('URL gambar tidak valid');
         
-        // Cek apakah URL adalah blob URL
+        // Cek apakah URL adalah blob URL (dari memory)
         if (imageUrl.startsWith('blob:')) {
             const link = document.createElement('a');
             link.href = imageUrl;

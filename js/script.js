@@ -35,16 +35,16 @@ const formatsV2 = [
     { id: 'textpro', name: 'TextPro', icon: 'fas fa-text-height', endpoint: '/api/m/textpro', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL TextPro', type: 'url' }, { name: 'text1', label: 'Teks 1', type: 'text' }, { name: 'text2', label: 'Teks 2', type: 'text' }] },
     { id: 'photooxy', name: 'PhotoOxy', icon: 'fas fa-image', endpoint: '/api/m/photooxy', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL PhotoOxy', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
     { id: 'ephoto360', name: 'Ephoto360', icon: 'fas fa-edit', endpoint: '/api/m/ephoto360', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL Ephoto360', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
-    // RANDOM IMAGES - dengan endpoint alternatif untuk menghindari 403
+    // RANDOM IMAGES
     { id: 'random_bluearchive', name: 'Random Blue Archive', icon: 'fas fa-dice-d6', endpoint: '/api/r/blue-archive', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
-    { id: 'random_cecan_thailand', name: 'Random Cecan Thailand', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/thailand', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/thailand' },
-    { id: 'random_cecan_china', name: 'Random Cecan China', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/china', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/china' },
-    { id: 'random_cecan_vietnam', name: 'Random Cecan Vietnam', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/vietnam', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/vietnam' },
-    { id: 'random_cecan_indonesia', name: 'Random Cecan Indonesia', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/indonesia', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/indonesia' },
-    { id: 'random_cecan_japan', name: 'Random Cecan Japan', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/japan', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/japan' },
-    { id: 'random_cecan_korea', name: 'Random Cecan Korea', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/korea', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, altEndpoint: '/api/random/cecan/korea' },
-    { id: 'random_waifu', name: 'Random Waifu', icon: 'fas fa-dice-d6', endpoint: '/api/r/waifu', baseUrl: 'https://api.waifu.pics', params: [], isRandom: true, useWaifuPics: true, category: 'sfw', type: 'waifu' },
-    { id: 'random_neko', name: 'Random Anime Neko', icon: 'fas fa-dice-d6', endpoint: '/api/neko', baseUrl: 'https://nekos.best/api/v2', params: [], isRandom: true, useNekosBest: true }
+    { id: 'random_cecan_thailand', name: 'Random Cecan Thailand', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/thailand', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_cecan_china', name: 'Random Cecan China', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/china', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_cecan_vietnam', name: 'Random Cecan Vietnam', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/vietnam', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_cecan_indonesia', name: 'Random Cecan Indonesia', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/indonesia', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_cecan_japan', name: 'Random Cecan Japan', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/japan', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_cecan_korea', name: 'Random Cecan Korea', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/korea', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true },
+    { id: 'random_waifu', name: 'Random Waifu', icon: 'fas fa-dice-d6', endpoint: '/sfw/waifu', baseUrl: 'https://api.waifu.pics', params: [], isRandom: true, useWaifuPics: true },
+    { id: 'random_neko', name: 'Random Anime Neko', icon: 'fas fa-dice-d6', endpoint: '/api/v2/neko', baseUrl: 'https://nekos.best', params: [], isRandom: true, useNekosBest: true }
 ];
 
 let activeFormatV1 = formatsV1[0];
@@ -52,10 +52,9 @@ let activeFormatV2 = formatsV2[0];
 let currentVersion = 'v1';
 
 // ========== VERIFICATION GATE ==========
-let isFollowed = false, isShared = false, verificationCompleted = false;
+let isFollowed = false, isShared = false;
 
 if (localStorage.getItem('quickfake_verified') === 'true') {
-    verificationCompleted = true;
     document.getElementById('gatePage').classList.add('hidden');
     document.getElementById('splashScreen').style.display = 'flex';
     initSplashScreen();
@@ -107,8 +106,10 @@ function switchMockupTab(version) {
 
 // ========== SPLASH SCREEN ==========
 function initSplashScreen() {
-    const splashScreen = document.getElementById('splashScreen'), mainContent = document.getElementById('mainContent');
-    const progressFill = document.getElementById('progressFill'), loadingPercentage = document.getElementById('loadingPercentage'), loadingStatus = document.getElementById('loadingStatus');
+    const splashScreen = document.getElementById('splashScreen');
+    const progressFill = document.getElementById('progressFill');
+    const loadingPercentage = document.getElementById('loadingPercentage');
+    const loadingStatus = document.getElementById('loadingStatus');
     const messages = [{ text: '🎨 Loading features...', progress: 20 }, { text: '⚡ Connecting to API...', progress: 40 }, { text: '✨ Preparing v1 & v2...', progress: 60 }, { text: '📸 Adding SSWeb...', progress: 80 }, { text: '🎉 Welcome to QuickFake!', progress: 100 }];
     let currentProgress = 0, msgIndex = 0;
     createParticles();
@@ -119,7 +120,7 @@ function initSplashScreen() {
             else {
                 clearInterval(interval);
                 if (msgIndex < messages.length - 1) { msgIndex++; const icons = ['', 'network-wired', 'palette', 'camera', 'check-circle']; loadingStatus.innerHTML = `<i class="fas fa-${icons[msgIndex]}"></i> ${messages[msgIndex].text}`; updateProgress(); }
-                else { setTimeout(() => { splashScreen.classList.add('fade-out'); mainContent.classList.remove('hidden'); setTimeout(() => { mainContent.classList.add('visible'); splashScreen.style.display = 'none'; }, 800); }, 500); }
+                else { setTimeout(() => { splashScreen.classList.add('fade-out'); document.getElementById('mainContent').classList.remove('hidden'); setTimeout(() => { document.getElementById('mainContent').classList.add('visible'); splashScreen.style.display = 'none'; }, 800); }, 500); }
             }
         }, 30);
     }
@@ -134,24 +135,46 @@ function createParticles() {
 
 // ========== GENERATE LOADING ==========
 function showGenerateLoading(version) {
-    const prefix = version === 'v1' ? 'V1' : version === 'v2' ? 'V2' : '';
-    const btn = document.getElementById(`generateBtn${prefix}`), loading = document.getElementById(`generateLoading${prefix}`), fill = document.getElementById(`generateProgressFill${prefix}`), percent = document.getElementById(`generateProgressPercent${prefix}`), msg = document.getElementById(`generateLoadingMessage${prefix}`);
+    const prefix = version === 'v1' ? 'V1' : 'V2';
+    const btn = document.getElementById(`generateBtn${prefix}`);
+    const loading = document.getElementById(`generateLoading${prefix}`);
+    const fill = document.getElementById(`generateProgressFill${prefix}`);
+    const percent = document.getElementById(`generateProgressPercent${prefix}`);
+    
     if (btn) btn.classList.add('hidden');
     if (loading) loading.classList.remove('hidden');
-    let progress = 0, idx = 0;
+    
+    let progress = 0;
     const interval = setInterval(() => {
-        if (progress < 95) { progress += Math.random() * 12; if (progress > 95) progress = 95; if (fill) fill.style.width = progress + '%'; if (percent) percent.textContent = Math.floor(progress); }
+        if (progress < 95) { 
+            progress += Math.random() * 12; 
+            if (progress > 95) progress = 95; 
+            if (fill) fill.style.width = progress + '%'; 
+            if (percent) percent.textContent = Math.floor(progress); 
+        }
     }, 180);
+    
     return { interval, fill, percent };
 }
 
-function hideGenerateLoading(loading, fill, percent, success = true, version) {
-    if (loading && loading.interval) clearInterval(loading.interval);
-    if (loading && loading.clearInterval) clearInterval(loading.clearInterval);
-    const prefix = version === 'v1' ? 'V1' : version === 'v2' ? 'V2' : '';
-    const btn = document.getElementById(`generateBtn${prefix}`), container = document.getElementById(`generateLoading${prefix}`);
-    if (success && fill && percent) { fill.style.width = '100%'; percent.textContent = '100'; setTimeout(() => { if (container) container.classList.add('hidden'); if (btn) btn.classList.remove('hidden'); }, 500); }
-    else { if (container) container.classList.add('hidden'); if (btn) btn.classList.remove('hidden'); }
+function hideGenerateLoading(loadingObj, success = true, version) {
+    if (loadingObj && loadingObj.interval) clearInterval(loadingObj.interval);
+    
+    const prefix = version === 'v1' ? 'V1' : 'V2';
+    const btn = document.getElementById(`generateBtn${prefix}`);
+    const container = document.getElementById(`generateLoading${prefix}`);
+    
+    if (success && loadingObj && loadingObj.fill && loadingObj.percent) { 
+        loadingObj.fill.style.width = '100%'; 
+        loadingObj.percent.textContent = '100'; 
+        setTimeout(() => { 
+            if (container) container.classList.add('hidden'); 
+            if (btn) btn.classList.remove('hidden'); 
+        }, 500); 
+    } else { 
+        if (container) container.classList.add('hidden'); 
+        if (btn) btn.classList.remove('hidden'); 
+    }
 }
 
 // ========== FUNGSI KHUSUS UNTUK RANDOM IMAGES ==========
@@ -160,88 +183,41 @@ async function fetchRandomImage(format) {
     
     // Untuk Waifu.pics API
     if (format.useWaifuPics) {
-        try {
-            const response = await fetch(`https://api.waifu.pics/${format.type || 'sfw'}/${format.category || 'waifu'}`, {
-                headers: { 'Accept': 'application/json' }
-            });
-            if (!response.ok) throw new Error(`Waifu.pics error: ${response.status}`);
-            const data = await response.json();
-            if (data.url) return data.url;
-            throw new Error('No URL in response');
-        } catch (err) {
-            console.error('Waifu.pics error:', err);
-            throw err;
-        }
+        const response = await fetch('https://api.waifu.pics/sfw/waifu');
+        if (!response.ok) throw new Error(`Waifu.pics error: ${response.status}`);
+        const data = await response.json();
+        if (data.url) return data.url;
+        throw new Error('No URL from Waifu.pics');
     }
     
     // Untuk Nekos.best API
     if (format.useNekosBest) {
-        try {
-            const response = await fetch('https://nekos.best/api/v2/neko', {
-                headers: { 'Accept': 'application/json' }
-            });
-            if (!response.ok) throw new Error(`Nekos.best error: ${response.status}`);
-            const data = await response.json();
-            if (data.results && data.results[0] && data.results[0].url) return data.results[0].url;
-            throw new Error('No URL in response');
-        } catch (err) {
-            console.error('Nekos.best error:', err);
-            throw err;
-        }
-    }
-    
-    // Coba endpoint utama
-    const baseUrl = format.baseUrl;
-    let apiUrl = `${baseUrl}${format.endpoint}`;
-    
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
-        
-        const response = await fetch(apiUrl, {
-            signal: controller.signal,
-            headers: {
-                'Accept': 'application/json',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
-        });
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        
+        const response = await fetch('https://nekos.best/api/v2/neko');
+        if (!response.ok) throw new Error(`Nekos.best error: ${response.status}`);
         const data = await response.json();
-        let imageUrl = null;
-        
-        // Parse berbagai format response
-        if (data.url) imageUrl = data.url;
-        else if (data.data?.url) imageUrl = data.data.url;
-        else if (data.result?.url) imageUrl = data.result.url;
-        else if (data.image) imageUrl = data.image;
-        else if (data.data?.image) imageUrl = data.data.image;
-        else if (Array.isArray(data) && data[0]?.url) imageUrl = data[0].url;
-        else if (typeof data === 'string' && data.startsWith('http')) imageUrl = data;
-        
-        if (imageUrl) return imageUrl;
-        
-        // Coba alternatif endpoint jika ada
-        if (format.altEndpoint) {
-            console.log('Trying alternative endpoint:', format.altEndpoint);
-            const altResponse = await fetch(`${baseUrl}${format.altEndpoint}`, {
-                headers: { 'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0' }
-            });
-            if (altResponse.ok) {
-                const altData = await altResponse.json();
-                if (altData.url) return altData.url;
-                if (altData.data?.url) return altData.data.url;
-                if (altData.result?.url) return altData.result.url;
-            }
-        }
-        
-        throw new Error('Tidak dapat menemukan URL gambar');
-    } catch (err) {
-        console.error('Random image fetch error:', err);
-        throw err;
+        if (data.results && data.results[0] && data.results[0].url) return data.results[0].url;
+        throw new Error('No URL from Nekos.best');
     }
+    
+    // Untuk API lainnya (cecan, bluearchive, dll)
+    const apiUrl = `${format.baseUrl}${format.endpoint}`;
+    const response = await fetch(apiUrl, {
+        headers: { 'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0' }
+    });
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const data = await response.json();
+    
+    // Parse berbagai format response
+    if (data.url) return data.url;
+    if (data.data?.url) return data.data.url;
+    if (data.result?.url) return data.result.url;
+    if (data.image) return data.image;
+    if (data.data?.image) return data.data.image;
+    if (Array.isArray(data) && data[0]?.url) return data[0].url;
+    
+    throw new Error('Tidak dapat menemukan URL gambar');
 }
 
 // ========== MOCKUP FUNCTIONS ==========
@@ -262,7 +238,7 @@ function renderFormatGrid(prefix, formats, activeFormat, setActive) {
 function renderParamForm(prefix, activeFormat) {
     const container = document.getElementById(`paramForm${prefix}`);
     if (!container) return;
-    if (!activeFormat.params?.length) { container.innerHTML = '<div class="input-group"><p style="color:#9ca3af;">Tidak ada parameter (random image)</p></div>'; return; }
+    if (!activeFormat.params?.length) { container.innerHTML = '<div class="input-group"><p style="color:#9ca3af;">✨ Random Image - Klik Generate untuk mendapatkan gambar acak</p></div>'; return; }
     container.innerHTML = activeFormat.params.map(p => `<div class="input-group"><label>${p.label}</label>${p.type === 'textarea' ? `<textarea name="${p.name}" rows="3" placeholder="${p.placeholder || ''}"></textarea>` : `<input type="${p.type}" name="${p.name}" placeholder="${p.placeholder || ''}" />`}</div>`).join('');
 }
 
@@ -270,29 +246,30 @@ async function generateMockup(version) {
     const prefix = version === 'v1' ? 'V1' : 'V2';
     const activeFormat = version === 'v1' ? activeFormatV1 : activeFormatV2;
     const resultDiv = document.getElementById(`resultArea${prefix}`);
-    const loadingInfo = showGenerateLoading(version);
+    const loadingObj = showGenerateLoading(version);
     
     try {
-        // Handle random image (tanpa parameter)
-        if (activeFormat.isRandom || (activeFormat.params && activeFormat.params.length === 0)) {
+        // Handle RANDOM IMAGE
+        if (activeFormat.isRandom) {
             const imageUrl = await fetchRandomImage(activeFormat);
-            resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Mockup" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" /><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
+            resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Random Image" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/3b82f6?text=Failed+to+load';"/><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
+            
             const downloadBtn = document.getElementById(`downloadImageBtn${prefix}`);
             if (downloadBtn) { 
                 const newBtn = downloadBtn.cloneNode(true); 
                 downloadBtn.parentNode.replaceChild(newBtn, downloadBtn); 
-                newBtn.onclick = async (e) => { 
+                newBtn.onclick = (e) => { 
                     e.preventDefault(); 
-                    if (typeof window.downloadImage === 'function') await window.downloadImage(imageUrl, `${activeFormat.id}_${Date.now()}.png`); 
-                    else { const a = document.createElement('a'); a.href = imageUrl; a.download = `${activeFormat.id}_${Date.now()}.png`; a.click(); } 
+                    if (typeof window.downloadImage === 'function') window.downloadImage(imageUrl, `${activeFormat.id}_${Date.now()}.png`);
+                    else { const a = document.createElement('a'); a.href = imageUrl; a.download = `${activeFormat.id}_${Date.now()}.png`; a.click(); }
                 }; 
             }
-            hideGenerateLoading(loadingInfo, null, null, true, version);
-            if (window.showToast) window.showToast('Gambar berhasil dihasilkan!', 'success');
+            hideGenerateLoading(loadingObj, true, version);
+            if (window.showToast) window.showToast('Gambar acak berhasil dihasilkan!', 'success');
             return;
         }
         
-        // Handle regular mockup dengan parameter
+        // Handle REGULAR MOCKUP
         const inputs = document.querySelectorAll(`#paramForm${prefix} input, #paramForm${prefix} textarea`);
         let params = {};
         inputs.forEach(inp => { if (inp.value.trim()) params[inp.name] = encodeURIComponent(inp.value.trim()); });
@@ -300,6 +277,8 @@ async function generateMockup(version) {
         const baseUrl = activeFormat.baseUrl || 'https://api.zenzxz.my.id';
         let apiUrl = `${baseUrl}${activeFormat.endpoint}?`;
         apiUrl += Object.entries(params).map(([k, v]) => `${k}=${v}`).join('&');
+        
+        console.log('Fetching:', apiUrl);
         
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000);
@@ -315,58 +294,67 @@ async function generateMockup(version) {
         clearTimeout(timeoutId);
         
         if (!response.ok) {
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || errorData.error || `HTTP ${response.status}`);
-            }
-            throw new Error(`HTTP ${response.status}`);
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         
-        const contentType = response.headers.get('content-type');
+        const contentType = response.headers.get('content-type') || '';
         let imageUrl;
         let blob;
         
-        if (contentType && contentType.includes('application/json')) {
+        // Jika response adalah GAMBAR LANGSUNG
+        if (contentType.startsWith('image/')) {
+            blob = await response.blob();
+            imageUrl = URL.createObjectURL(blob);
+        } 
+        // Jika response adalah JSON
+        else if (contentType.includes('application/json')) {
             const data = await response.json();
-            if (data.result?.url) imageUrl = data.result.url;
-            else if (data.url) imageUrl = data.url;
-            else if (data.image) imageUrl = data.image;
-            else if (data.data?.url) imageUrl = data.data.url;
+            let imgUrl = null;
+            if (data.result?.url) imgUrl = data.result.url;
+            else if (data.url) imgUrl = data.url;
+            else if (data.image) imgUrl = data.image;
+            else if (data.data?.url) imgUrl = data.data.url;
             else throw new Error('Tidak dapat menemukan URL gambar dalam response');
             
-            const imgResponse = await fetch(imageUrl, {
+            const imgResponse = await fetch(imgUrl, {
                 headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
             });
             if (!imgResponse.ok) throw new Error(`Gagal mengambil gambar: ${imgResponse.status}`);
             blob = await imgResponse.blob();
             imageUrl = URL.createObjectURL(blob);
-        } else {
+        }
+        else {
+            // Coba treat sebagai blob gambar
             blob = await response.blob();
-            if (!blob.type.startsWith('image/')) throw new Error('Bukan format gambar');
-            imageUrl = URL.createObjectURL(blob);
+            if (blob.size > 0 && (blob.type.startsWith('image/') || blob.type === 'application/octet-stream')) {
+                imageUrl = URL.createObjectURL(blob);
+            } else {
+                throw new Error('Response tidak dikenali (bukan gambar atau JSON)');
+            }
         }
         
-        resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Mockup" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" /><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
+        if (!imageUrl) throw new Error('Gagal memproses gambar');
+        
+        resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Mockup" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/ef4444?text=Failed+to+load';"/><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
         
         const downloadBtn = document.getElementById(`downloadImageBtn${prefix}`);
         if (downloadBtn) { 
             const newBtn = downloadBtn.cloneNode(true); 
             downloadBtn.parentNode.replaceChild(newBtn, downloadBtn); 
-            newBtn.onclick = async (e) => { 
+            newBtn.onclick = (e) => { 
                 e.preventDefault(); 
-                if (typeof window.downloadImage === 'function') await window.downloadImage(imageUrl, `${activeFormat.id}_mockup_${Date.now()}.png`); 
-                else { const a = document.createElement('a'); a.href = imageUrl; a.download = `${activeFormat.id}_mockup_${Date.now()}.png`; a.click(); } 
+                if (typeof window.downloadImage === 'function') window.downloadImage(imageUrl, `${activeFormat.id}_mockup_${Date.now()}.png`);
+                else { const a = document.createElement('a'); a.href = imageUrl; a.download = `${activeFormat.id}_mockup_${Date.now()}.png`; a.click(); }
             }; 
         }
         
-        hideGenerateLoading(loadingInfo, null, null, true, version);
+        hideGenerateLoading(loadingObj, true, version);
         if (window.showToast) window.showToast('Mockup berhasil dibuat!', 'success');
         
     } catch (err) { 
         console.error('Generate error:', err);
-        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal: ${err.message}</p><p style="font-size:12px; margin-top:8px;">Coba refresh atau pilih format lain</p></div>`; 
-        hideGenerateLoading(loadingInfo, null, null, false, version); 
+        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal: ${err.message}</p><p style="font-size:12px; margin-top:8px;">Tips: Periksa koneksi internet dan coba lagi</p></div>`; 
+        hideGenerateLoading(loadingObj, false, version); 
         if (window.showToast) window.showToast(err.message, 'error'); 
     }
 }
@@ -394,17 +382,8 @@ async function generateSSWeb() {
     loadingDiv.classList.remove('hidden');
     loadingFill.style.width = '0%';
     loadingPercent.textContent = '0';
-    loadingMessage.innerHTML = '<i class="fas fa-globe"></i> Menghubungkan ke server...';
     
     let progress = 0;
-    let msgIndex = 0;
-    const loadingMessages = [
-        { icon: 'fa-globe', text: 'Menghubungkan ke server...' },
-        { icon: 'fa-camera', text: 'Mengambil screenshot...' },
-        { icon: 'fa-image', text: 'Memproses gambar...' },
-        { icon: 'fa-check-circle', text: 'Menyelesaikan...' }
-    ];
-    
     const progressInterval = setInterval(() => {
         if (progress < 90) { 
             progress += Math.random() * 15; 
@@ -412,71 +391,69 @@ async function generateSSWeb() {
             loadingFill.style.width = progress + '%'; 
             loadingPercent.textContent = Math.floor(progress); 
         }
-        if (progress >= 20 && msgIndex === 0) { msgIndex++; loadingMessage.innerHTML = `<i class="fas ${loadingMessages[msgIndex].icon}"></i> ${loadingMessages[msgIndex].text}`; }
-        else if (progress >= 50 && msgIndex === 1) { msgIndex++; loadingMessage.innerHTML = `<i class="fas ${loadingMessages[msgIndex].icon}"></i> ${loadingMessages[msgIndex].text}`; }
-        else if (progress >= 75 && msgIndex === 2) { msgIndex++; loadingMessage.innerHTML = `<i class="fas ${loadingMessages[msgIndex].icon}"></i> ${loadingMessages[msgIndex].text}`; }
     }, 200);
     
     const fullPageValue = fullPage === 'penuh' ? 'true' : 'false';
-    const apiEndpoints = [
-        `https://api.zenzxz.my.id/tools/ssweb?url=${encodeURIComponent(url)}&device=${device}&full_page=${fullPageValue}&scale=${scale}`,
-        `https://api.siputzx.my.id/tools/ssweb?url=${encodeURIComponent(url)}&device=${device}&full_page=${fullPageValue}&scale=${scale}`
+    const scaleValue = scale === '1' ? '1' : scale === '2' ? '2' : '3';
+    
+    const endpoints = [
+        `https://api.zenzxz.my.id/tools/ssweb?url=${encodeURIComponent(url)}&device=${device}&full_page=${fullPageValue}&scale=${scaleValue}`,
+        `https://api.siputzx.my.id/tools/ssweb?url=${encodeURIComponent(url)}&device=${device}&full_page=${fullPageValue}&scale=${scaleValue}`
     ];
     
     let imageUrl = null;
     let lastError = null;
     
-    for (let i = 0; i < apiEndpoints.length; i++) {
+    for (let i = 0; i < endpoints.length; i++) {
         try {
             loadingMessage.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> Mencoba server ${i + 1}...`;
             
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 25000);
+            const timeoutId = setTimeout(() => controller.abort(), 20000);
             
-            const response = await fetch(apiEndpoints[i], { 
+            const response = await fetch(endpoints[i], { 
                 signal: controller.signal,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-                }
+                headers: { 'User-Agent': 'Mozilla/5.0' }
             });
             clearTimeout(timeoutId);
             
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
-            const contentType = response.headers.get('content-type');
-            let data;
+            const contentType = response.headers.get('content-type') || '';
             
-            if (contentType && contentType.includes('application/json')) {
-                data = await response.json();
-                if (data.status && data.result?.url) imageUrl = data.result.url;
+            if (contentType.includes('application/json')) {
+                const data = await response.json();
+                if (data.result?.url) imageUrl = data.result.url;
                 else if (data.url) imageUrl = data.url;
                 else if (data.screenshot) imageUrl = data.screenshot;
                 else if (data.image) imageUrl = data.image;
-                else throw new Error('Response JSON tidak memiliki URL gambar');
-            } else {
+                else throw new Error('No image URL in response');
+            } 
+            else if (contentType.startsWith('image/')) {
                 const blob = await response.blob();
-                if (blob.type.startsWith('image/')) imageUrl = URL.createObjectURL(blob);
-                else throw new Error('Bukan format gambar');
+                imageUrl = URL.createObjectURL(blob);
+            }
+            else {
+                throw new Error('Unexpected response type');
             }
             
             if (imageUrl) break;
         } catch (err) {
-            console.error(`Endpoint ${i + 1} gagal:`, err.message);
+            console.error(`Endpoint ${i + 1} failed:`, err);
             lastError = err;
-            continue;
         }
     }
     
+    clearInterval(progressInterval);
+    
     if (!imageUrl) {
-        clearInterval(progressInterval);
-        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal mengambil screenshot</p><p style="font-size:12px; margin-top:8px;">${lastError?.message || 'Semua server gagal, coba lagi nanti'}</p><p style="font-size:11px; margin-top:4px;">Tips: Pastikan URL valid dan website dapat diakses</p></div>`;
+        resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal mengambil screenshot</p><p style="font-size:12px; margin-top:8px;">${lastError?.message || 'Coba lagi nanti'}</p></div>`;
         loadingDiv.classList.add('hidden');
         generateBtn.classList.remove('hidden');
         if (window.showToast) window.showToast(lastError?.message || 'Gagal mengambil screenshot', 'error');
         return;
     }
     
-    clearInterval(progressInterval);
     loadingFill.style.width = '100%';
     loadingPercent.textContent = '100';
     loadingMessage.innerHTML = '<i class="fas fa-check-circle"></i> Selesai!';
@@ -488,10 +465,10 @@ async function generateSSWeb() {
         if (downloadBtn) { 
             const newBtn = downloadBtn.cloneNode(true); 
             downloadBtn.parentNode.replaceChild(newBtn, downloadBtn); 
-            newBtn.onclick = async (e) => { 
+            newBtn.onclick = (e) => { 
                 e.preventDefault(); 
-                if (typeof window.downloadImage === 'function') await window.downloadImage(imageUrl, `screenshot_${Date.now()}.png`); 
-                else { const a = document.createElement('a'); a.href = imageUrl; a.download = `screenshot_${Date.now()}.png`; a.click(); } 
+                if (typeof window.downloadImage === 'function') window.downloadImage(imageUrl, `screenshot_${Date.now()}.png`);
+                else { const a = document.createElement('a'); a.href = imageUrl; a.download = `screenshot_${Date.now()}.png`; a.click(); }
             }; 
         }
         
@@ -504,44 +481,84 @@ async function generateSSWeb() {
 
 // ========== INFO & BERITA FUNCTIONS ==========
 let currentBeritaSource = 'cnbc', currentGempaTab = 'auto', currentChannel = 'sctv';
-const beritaSources = { cnbc: 'https://api.siputzx.my.id/api/berita/cnbcindonesia', liputan6: 'https://api.siputzx.my.id/api/berita/liputan6', tribun: 'https://api.siputzx.my.id/api/berita/tribunnews', sindonews: 'https://api.siputzx.my.id/api/berita/sindonews', kompas: 'https://api.siputzx.my.id/api/berita/kompas', merdeka: 'https://api.siputzx.my.id/api/berita/merdeka', cnn: 'https://api.siputzx.my.id/api/berita/cnn', antara: 'https://api.siputzx.my.id/api/berita/antara' };
+const beritaSources = { 
+    cnbc: 'https://api.siputzx.my.id/api/berita/cnbcindonesia', 
+    liputan6: 'https://api.siputzx.my.id/api/berita/liputan6', 
+    tribun: 'https://api.siputzx.my.id/api/berita/tribunnews', 
+    sindonews: 'https://api.siputzx.my.id/api/berita/sindonews', 
+    kompas: 'https://api.siputzx.my.id/api/berita/kompas', 
+    merdeka: 'https://api.siputzx.my.id/api/berita/merdeka', 
+    cnn: 'https://api.siputzx.my.id/api/berita/cnn', 
+    antara: 'https://api.siputzx.my.id/api/berita/antara' 
+};
 
 function initInfoTabs() {
     const tabBtns = document.querySelectorAll('.info-tab-btn');
     const sections = { berita: document.getElementById('infoBerita'), gempa: document.getElementById('infoGempa'), cuaca: document.getElementById('infoCuaca'), jadwaltv: document.getElementById('infoJadwalTV') };
-    tabBtns.forEach(btn => { btn.addEventListener('click', () => { tabBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); Object.values(sections).forEach(s => s.classList.remove('active-info')); if (sections[btn.dataset.info]) sections[btn.dataset.info].classList.add('active-info'); if (btn.dataset.info === 'gempa') loadGempaData(); if (btn.dataset.info === 'jadwaltv') loadJadwalTV(currentChannel); }); });
+    tabBtns.forEach(btn => { 
+        btn.addEventListener('click', () => { 
+            tabBtns.forEach(b => b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            Object.values(sections).forEach(s => s?.classList.remove('active-info')); 
+            if (sections[btn.dataset.info]) sections[btn.dataset.info].classList.add('active-info'); 
+            if (btn.dataset.info === 'gempa') loadGempaData(); 
+            if (btn.dataset.info === 'jadwaltv') loadJadwalTV(currentChannel); 
+        }); 
+    });
 }
 
 function initBeritaSources() {
-    document.querySelectorAll('.source-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentBeritaSource = btn.dataset.source; loadBerita(currentBeritaSource); }); });
+    document.querySelectorAll('.source-btn').forEach(btn => { 
+        btn.addEventListener('click', () => { 
+            document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            currentBeritaSource = btn.dataset.source; 
+            loadBerita(currentBeritaSource); 
+        }); 
+    });
 }
 
 async function loadBerita(source) {
     const container = document.getElementById('beritaContent');
     container.innerHTML = '<div class="loading-info"><i class="fas fa-spinner fa-pulse"></i> Memuat berita...</div>';
     try {
-        const response = await fetch(beritaSources[source]); const data = await response.json();
+        const response = await fetch(beritaSources[source]); 
+        const data = await response.json();
         if (!data.status || !data.data) throw new Error('Gagal memuat berita');
         const articles = data.data.slice(0, 20);
         container.innerHTML = articles.map(article => `<div class="berita-item"><div class="berita-title"><a href="${article.link || '#'}" target="_blank">${article.title || 'Judul tidak tersedia'}</a></div><div class="berita-meta"><span><i class="far fa-clock"></i> ${article.time || article.timestamp || 'Baru saja'}</span><span><i class="fas fa-tag"></i> ${article.category || article.channel || 'Umum'}</span></div></div>`).join('');
         if (articles.length === 0) container.innerHTML = '<div class="loading-info">Tidak ada berita</div>';
-    } catch (error) { console.error('Berita error:', error); container.innerHTML = '<div class="loading-info">Gagal memuat berita</div>'; }
+    } catch (error) { 
+        console.error('Berita error:', error); 
+        container.innerHTML = '<div class="loading-info">Gagal memuat berita</div>'; 
+    }
 }
 
 function initGempaTabs() {
-    document.querySelectorAll('.gempa-subtab').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.gempa-subtab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentGempaTab = btn.dataset.gempa; loadGempaData(); }); });
+    document.querySelectorAll('.gempa-subtab').forEach(btn => { 
+        btn.addEventListener('click', () => { 
+            document.querySelectorAll('.gempa-subtab').forEach(b => b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            currentGempaTab = btn.dataset.gempa; 
+            loadGempaData(); 
+        }); 
+    });
 }
 
 async function loadGempaData() {
     const container = document.getElementById('gempaContent');
     container.innerHTML = '<div class="loading-info"><i class="fas fa-spinner fa-pulse"></i> Memuat data gempa...</div>';
     try {
-        const response = await fetch('https://api.siputzx.my.id/api/info/bmkg'); const data = await response.json();
+        const response = await fetch('https://api.siputzx.my.id/api/info/bmkg'); 
+        const data = await response.json();
         if (!data.status) throw new Error('Gagal memuat gempa');
         let gempaList = currentGempaTab === 'auto' ? (data.data.auto?.Infogempa?.gempa ? [data.data.auto.Infogempa.gempa] : []) : (data.data.dirasakan?.Infogempa?.gempa || []);
         if (gempaList.length === 0) { container.innerHTML = '<div class="loading-info">Tidak ada data gempa</div>'; return; }
         container.innerHTML = gempaList.map(g => `<div class="gempa-item"><div class="gempa-lokasi"><i class="fas fa-map-marker-alt"></i> ${g.Wilayah || 'Lokasi tidak diketahui'}</div><div class="gempa-magnitude">Magnitude: ${g.Magnitude || '?'}</div><div class="gempa-info"><i class="far fa-clock"></i> ${g.Jam || g.Tanggal || ''} | Kedalaman: ${g.Kedalaman || '?'}</div>${g.Dirasakan ? `<div class="gempa-info"><i class="fas fa-waveform"></i> Dirasakan: ${g.Dirasakan}</div>` : ''}</div>`).join('');
-    } catch (error) { console.error('Gempa error:', error); container.innerHTML = '<div class="loading-info">Gagal memuat data gempa</div>'; }
+    } catch (error) { 
+        console.error('Gempa error:', error); 
+        container.innerHTML = '<div class="loading-info">Gagal memuat data gempa</div>'; 
+    }
 }
 
 async function loadCuaca(city) {
@@ -549,51 +566,93 @@ async function loadCuaca(city) {
     if (!city.trim()) { container.innerHTML = '<div class="loading-info">Masukkan nama kota</div>'; return; }
     container.innerHTML = '<div class="loading-info"><i class="fas fa-spinner fa-pulse"></i> Memuat data cuaca...</div>';
     try {
-        const response = await fetch(`https://api.siputzx.my.id/api/info/cuaca?q=${encodeURIComponent(city)}`); const data = await response.json();
+        const response = await fetch(`https://api.siputzx.my.id/api/info/cuaca?q=${encodeURIComponent(city)}`); 
+        const data = await response.json();
         if (!data.status || !data.data) throw new Error('Gagal memuat cuaca');
-        const weather = data.data.weather?.[0]; const location = data.data.wilayah;
+        const weather = data.data.weather?.[0]; 
+        const location = data.data.wilayah;
         if (!weather) { container.innerHTML = '<div class="loading-info">Data cuaca tidak tersedia</div>'; return; }
         const currentWeather = weather.cuaca?.[0]?.[0] || {};
         container.innerHTML = `<div class="cuaca-item"><h3><i class="fas fa-location-dot"></i> ${location?.desa || city}, ${location?.kecamatan || ''}</h3><div class="cuaca-temp">🌡️ ${currentWeather.t || '?'}°C</div><div><i class="fas fa-cloud"></i> ${currentWeather.weather_desc || 'Tidak diketahui'}</div><div><i class="fas fa-tint"></i> Kelembaban: ${currentWeather.hu || '?'}%</div><div><i class="fas fa-wind"></i> Angin: ${currentWeather.wd || '?'} (${currentWeather.ws || '?'} m/s)</div></div>`;
-    } catch (error) { console.error('Cuaca error:', error); container.innerHTML = '<div class="loading-info">Gagal memuat data cuaca</div>'; }
+    } catch (error) { 
+        console.error('Cuaca error:', error); 
+        container.innerHTML = '<div class="loading-info">Gagal memuat data cuaca</div>'; 
+    }
 }
 
 function initTVChannels() {
-    document.querySelectorAll('.channel-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentChannel = btn.dataset.channel; loadJadwalTV(currentChannel); }); });
+    document.querySelectorAll('.channel-btn').forEach(btn => { 
+        btn.addEventListener('click', () => { 
+            document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            currentChannel = btn.dataset.channel; 
+            loadJadwalTV(currentChannel); 
+        }); 
+    });
 }
 
 async function loadJadwalTV(channel) {
     const container = document.getElementById('jadwaltvContent');
     container.innerHTML = '<div class="loading-info"><i class="fas fa-spinner fa-pulse"></i> Memuat jadwal TV...</div>';
     try {
-        const response = await fetch(`https://api.siputzx.my.id/api/info/jadwaltv?channel=${channel}`); const data = await response.json();
+        const response = await fetch(`https://api.siputzx.my.id/api/info/jadwaltv?channel=${channel}`); 
+        const data = await response.json();
         if (!data.status || !data.data) throw new Error('Gagal memuat jadwal TV');
         const schedules = data.data;
         if (schedules.length === 0) { container.innerHTML = '<div class="loading-info">Tidak ada jadwal acara</div>'; return; }
         container.innerHTML = schedules.map(s => `<div class="tv-item"><div class="tv-jam">${s.jam || '?'}</div><div class="tv-acara">${s.acara || 'Acara tidak tersedia'}</div></div>`).join('');
-    } catch (error) { console.error('Jadwal TV error:', error); container.innerHTML = '<div class="loading-info">Gagal memuat jadwal TV</div>'; }
+    } catch (error) { 
+        console.error('Jadwal TV error:', error); 
+        container.innerHTML = '<div class="loading-info">Gagal memuat jadwal TV</div>'; 
+    }
 }
 
 function initInfoPage() {
-    initInfoTabs(); initBeritaSources(); initGempaTabs(); initTVChannels();
+    initInfoTabs(); 
+    initBeritaSources(); 
+    initGempaTabs(); 
+    initTVChannels();
     loadBerita('cnbc');
-    const searchBtn = document.getElementById('searchCuacaBtn'), cuacaInput = document.getElementById('cuacaCity');
-    if (searchBtn && cuacaInput) { searchBtn.addEventListener('click', () => loadCuaca(cuacaInput.value)); cuacaInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') loadCuaca(cuacaInput.value); }); }
+    const searchBtn = document.getElementById('searchCuacaBtn');
+    const cuacaInput = document.getElementById('cuacaCity');
+    if (searchBtn && cuacaInput) { 
+        searchBtn.addEventListener('click', () => loadCuaca(cuacaInput.value)); 
+        cuacaInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') loadCuaca(cuacaInput.value); }); 
+    }
 }
 
 // ========== NAVIGATION ==========
 function initNavigation() {
     const links = document.querySelectorAll('.nav-link');
-    const pages = { home: document.getElementById('homePage'), ssweb: document.getElementById('sswebPage'), info: document.getElementById('infoPage'), howto: document.getElementById('howtoPage'), guide: document.getElementById('guidePage'), docs: document.getElementById('docsPage') };
+    const pages = { 
+        home: document.getElementById('homePage'), 
+        ssweb: document.getElementById('sswebPage'), 
+        info: document.getElementById('infoPage'), 
+        howto: document.getElementById('howtoPage'), 
+        guide: document.getElementById('guidePage'), 
+        docs: document.getElementById('docsPage') 
+    };
+    
     function switchPage(pageId) {
         Object.values(pages).forEach(p => p?.classList.remove('active-page'));
         if (pages[pageId]) pages[pageId].classList.add('active-page');
         links.forEach(l => l.classList.remove('active'));
         document.querySelector(`.nav-link[data-page="${pageId}"]`)?.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (pageId === 'info') { loadBerita(currentBeritaSource); }
+        if (pageId === 'info') loadBerita(currentBeritaSource);
     }
-    links.forEach(l => { l.addEventListener('click', (e) => { e.preventDefault(); switchPage(l.dataset.page); document.getElementById('navMenu')?.classList.remove('active'); }); });
-    document.getElementById('navToggle')?.addEventListener('click', () => { document.getElementById('navMenu')?.classList.toggle('active'); });
+    
+    links.forEach(l => { 
+        l.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            switchPage(l.dataset.page); 
+            document.getElementById('navMenu')?.classList.remove('active'); 
+        }); 
+    });
+    
+    document.getElementById('navToggle')?.addEventListener('click', () => { 
+        document.getElementById('navMenu')?.classList.toggle('active'); 
+    });
+    
     switchPage('home');
 }

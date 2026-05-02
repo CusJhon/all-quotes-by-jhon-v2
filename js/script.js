@@ -22,9 +22,9 @@ const formatsV2 = [
     { id: 'gay', name: 'Gay Image', icon: 'fas fa-rainbow', endpoint: '/api/canvas/gay', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'nama', label: 'Nama', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'num', label: 'Angka', type: 'text' }] },
     { id: 'profilecard', name: 'Profile Card', icon: 'fas fa-id-card', endpoint: '/api/canvas/profile', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'backgroundURL', label: 'URL Background', type: 'url' }, { name: 'avatarURL', label: 'URL Avatar', type: 'url' }, { name: 'rankName', label: 'Nama Rank', type: 'text' }, { name: 'rankId', label: 'ID Rank', type: 'text' }, { name: 'exp', label: 'EXP', type: 'text' }, { name: 'requireExp', label: 'EXP Required', type: 'text' }, { name: 'level', label: 'Level', type: 'text' }, { name: 'name', label: 'Nama', type: 'text' }] },
     { id: 'captcha', name: 'Captcha Image', icon: 'fas fa-shield-alt', endpoint: '/api/canvas/captcha', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'background', label: 'URL Background', type: 'url' }, { name: 'captchaKey', label: 'Kode Captcha', type: 'text' }, { name: 'border', label: 'Warna Border', type: 'text' }, { name: 'overlayOpacity', label: 'Opacity Overlay', type: 'text' }] },
-    { id: 'fakecomment', name: 'Fake xnxx Comment', icon: 'fas fa-comment-dots', endpoint: '/api/canvas/fake-xnxx', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'name', label: 'Nama', type: 'text' }, { name: 'quote', label: 'Kutipan', type: 'textarea' }, { name: 'likes', label: 'Jumlah Like', type: 'text' }, { name: 'dislikes', label: 'Jumlah Dislike', type: 'text' }] },
+    { id: 'fakecomment', name: 'Fake xny67 Comment', icon: 'fas fa-comment-dots', endpoint: '/api/canvas/fake-xny67', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'name', label: 'Nama', type: 'text' }, { name: 'quote', label: 'Kutipan', type: 'textarea' }, { name: 'likes', label: 'Jumlah Like', type: 'text' }, { name: 'dislikes', label: 'Jumlah Dislike', type: 'text' }] },
     { id: 'ship', name: 'Ship Image', icon: 'fas fa-heart', endpoint: '/api/canvas/ship', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'avatar1', label: 'URL Avatar 1', type: 'url' }, { name: 'avatar2', label: 'URL Avatar 2', type: 'url' }, { name: 'background', label: 'URL Background', type: 'url' }, { name: 'persen', label: 'Persentase (%)', type: 'text' }] },
-    { id: 'fakexn', name: 'Fake xnxx', icon: 'fas fa-skull', endpoint: '/api/canvas/xnxx', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'title', label: 'Judul', type: 'text' }, { name: 'image', label: 'URL Gambar', type: 'url' }] },
+    { id: 'fakexn', name: 'Fake xny67', icon: 'fas fa-skull', endpoint: '/api/canvas/xny67', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'title', label: 'Judul', type: 'text' }, { name: 'image', label: 'URL Gambar', type: 'url' }] },
     { id: 'beautiful', name: 'Beautiful Image', icon: 'fas fa-star', endpoint: '/api/canvas/beautiful', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url' }] },
     { id: 'sertifikat', name: 'Sertifikat Tolol', icon: 'fas fa-scroll', endpoint: '/api/canvas/sertifikat-tolol', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'text', label: 'Teks', type: 'text' }] },
     { id: 'ektp', name: 'eKTP Generator', icon: 'fas fa-id-card', endpoint: '/api/canvas/ektp', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'provinsi', label: 'Provinsi', type: 'text' }, { name: 'kota', label: 'Kota', type: 'text' }, { name: 'nik', label: 'NIK', type: 'text' }, { name: 'nama', label: 'Nama', type: 'text' }, { name: 'ttl', label: 'Tempat/Tgl Lahir', type: 'text' }, { name: 'jenis_kelamin', label: 'Jenis Kelamin', type: 'text' }, { name: 'golongan_darah', label: 'Golongan Darah', type: 'text' }, { name: 'alamat', label: 'Alamat', type: 'textarea' }, { name: 'rt/rw', label: 'RT/RW', type: 'text' }, { name: 'kel/desa', label: 'Kelurahan/Desa', type: 'text' }, { name: 'kecamatan', label: 'Kecamatan', type: 'text' }, { name: 'agama', label: 'Agama', type: 'text' }, { name: 'status', label: 'Status Perkawinan', type: 'text' }, { name: 'pekerjaan', label: 'Pekerjaan', type: 'text' }, { name: 'kewarganegaraan', label: 'Kewarganegaraan', type: 'text' }, { name: 'masa_berlaku', label: 'Masa Berlaku', type: 'text' }, { name: 'terbuat', label: 'Tanggal Terbuat', type: 'text' }, { name: 'pas_photo', label: 'URL Pas Photo', type: 'url' }] },
@@ -35,7 +35,7 @@ const formatsV2 = [
     { id: 'textpro', name: 'TextPro', icon: 'fas fa-text-height', endpoint: '/api/m/textpro', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL TextPro', type: 'url' }, { name: 'text1', label: 'Teks 1', type: 'text' }, { name: 'text2', label: 'Teks 2', type: 'text' }] },
     { id: 'photooxy', name: 'PhotoOxy', icon: 'fas fa-image', endpoint: '/api/m/photooxy', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL PhotoOxy', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
     { id: 'ephoto360', name: 'Ephoto360', icon: 'fas fa-edit', endpoint: '/api/m/ephoto360', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'url', label: 'URL Ephoto360', type: 'url' }, { name: 'text1', label: 'Teks', type: 'text' }] },
-    // RANDOM IMAGES - Cecan API (mengembalikan GAMBAR LANGSUNG)
+    // RANDOM IMAGES
     { id: 'random_bluearchive', name: 'Random Blue Archive', icon: 'fas fa-dice-d6', endpoint: '/api/r/blue-archive', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_thailand', name: 'Random Cecan Thailand', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/thailand', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_china', name: 'Random Cecan China', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/china', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
@@ -43,7 +43,6 @@ const formatsV2 = [
     { id: 'random_cecan_indonesia', name: 'Random Cecan Indonesia', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/indonesia', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_japan', name: 'Random Cecan Japan', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/japan', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
     { id: 'random_cecan_korea', name: 'Random Cecan Korea', icon: 'fas fa-dice-d6', endpoint: '/api/r/cecan/korea', baseUrl: 'https://api.siputzx.my.id', params: [], isRandom: true, isDirectImage: true },
-    // Waifu dan Neko (JSON response)
     { id: 'random_waifu', name: 'Random Waifu', icon: 'fas fa-dice-d6', endpoint: '/sfw/waifu', baseUrl: 'https://api.waifu.pics', params: [], isRandom: true, useWaifuPics: true },
     { id: 'random_neko', name: 'Random Anime Neko', icon: 'fas fa-dice-d6', endpoint: '/api/v2/neko', baseUrl: 'https://nekos.best', params: [], isRandom: true, useNekosBest: true }
 ];
@@ -179,11 +178,8 @@ function hideGenerateLoading(loadingObj, success = true, version) {
 }
 
 // ========== FUNGSI KHUSUS UNTUK RANDOM IMAGES ==========
-// Untuk API yang mengembalikan GAMBAR LANGSUNG (Cecan, Blue Archive)
 async function fetchDirectImage(format) {
     const apiUrl = `${format.baseUrl}${format.endpoint}`;
-    console.log('Fetching direct image from:', apiUrl);
-    
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
     
@@ -200,14 +196,10 @@ async function fetchDirectImage(format) {
     
     const blob = await response.blob();
     if (blob.size === 0) throw new Error('Gambar kosong');
-    if (!blob.type.startsWith('image/')) {
-        console.warn('Unexpected content type:', blob.type);
-    }
     
     return URL.createObjectURL(blob);
 }
 
-// Untuk Waifu.pics API (mengembalikan JSON dengan URL)
 async function fetchWaifuPics() {
     const response = await fetch('https://api.waifu.pics/sfw/waifu', {
         headers: { 'Accept': 'application/json' }
@@ -218,7 +210,6 @@ async function fetchWaifuPics() {
     throw new Error('No URL from Waifu.pics');
 }
 
-// Untuk Nekos.best API (mengembalikan JSON dengan URL)
 async function fetchNekosBest() {
     const response = await fetch('https://nekos.best/api/v2/neko', {
         headers: { 'Accept': 'application/json' }
@@ -262,19 +253,15 @@ async function generateMockup(version) {
         if (activeFormat.isRandom) {
             let imageUrl;
             
-            // Untuk API yang mengembalikan GAMBAR LANGSUNG (Cecan, Blue Archive)
             if (activeFormat.isDirectImage) {
                 imageUrl = await fetchDirectImage(activeFormat);
             }
-            // Untuk Waifu.pics
             else if (activeFormat.useWaifuPics) {
                 imageUrl = await fetchWaifuPics();
             }
-            // Untuk Nekos.best
             else if (activeFormat.useNekosBest) {
                 imageUrl = await fetchNekosBest();
             }
-            // Fallback ke direct image
             else {
                 imageUrl = await fetchDirectImage(activeFormat);
             }
@@ -296,7 +283,7 @@ async function generateMockup(version) {
             return;
         }
         
-        // Handle REGULAR MOCKUP (dengan parameter)
+        // Handle REGULAR MOCKUP
         const inputs = document.querySelectorAll(`#paramForm${prefix} input, #paramForm${prefix} textarea`);
         let params = {};
         inputs.forEach(inp => { if (inp.value.trim()) params[inp.name] = encodeURIComponent(inp.value.trim()); });
@@ -304,8 +291,6 @@ async function generateMockup(version) {
         const baseUrl = activeFormat.baseUrl || 'https://api.zenzxz.my.id';
         let apiUrl = `${baseUrl}${activeFormat.endpoint}?`;
         apiUrl += Object.entries(params).map(([k, v]) => `${k}=${v}`).join('&');
-        
-        console.log('Fetching:', apiUrl);
         
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000);
@@ -328,12 +313,10 @@ async function generateMockup(version) {
         let imageUrl;
         let blob;
         
-        // Jika response adalah GAMBAR LANGSUNG
         if (contentType.startsWith('image/')) {
             blob = await response.blob();
             imageUrl = URL.createObjectURL(blob);
         } 
-        // Jika response adalah JSON
         else if (contentType.includes('application/json')) {
             const data = await response.json();
             let imgUrl = null;
@@ -351,7 +334,6 @@ async function generateMockup(version) {
             imageUrl = URL.createObjectURL(blob);
         }
         else {
-            // Coba treat sebagai blob gambar
             blob = await response.blob();
             if (blob.size > 0 && (blob.type.startsWith('image/') || blob.type === 'application/octet-stream')) {
                 imageUrl = URL.createObjectURL(blob);
@@ -648,12 +630,13 @@ function initInfoPage() {
     }
 }
 
-// ========== NAVIGATION ==========
+// ========== NAVIGATION (DENGAN PAGE UPLOADER) ==========
 function initNavigation() {
     const links = document.querySelectorAll('.nav-link');
     const pages = { 
         home: document.getElementById('homePage'), 
-        ssweb: document.getElementById('sswebPage'), 
+        ssweb: document.getElementById('sswebPage'),
+        uploader: document.getElementById('uploaderPage'),
         info: document.getElementById('infoPage'), 
         howto: document.getElementById('howtoPage'), 
         guide: document.getElementById('guidePage'), 

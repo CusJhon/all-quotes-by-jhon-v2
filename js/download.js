@@ -1,11 +1,9 @@
-// ========== DOWNLOAD FUNCTION ==========
 async function downloadImage(imageUrl, filename = 'screenshot.png') {
     console.log('📥 Downloading:', imageUrl);
     try {
         if (window.showToast) window.showToast('⏳ Mengunduh gambar...', 'info');
         if (!imageUrl) throw new Error('URL gambar tidak valid');
         
-        // Cek apakah URL adalah blob URL (dari memory)
         if (imageUrl.startsWith('blob:')) {
             const link = document.createElement('a');
             link.href = imageUrl;
@@ -21,7 +19,6 @@ async function downloadImage(imageUrl, filename = 'screenshot.png') {
             return true;
         }
         
-        // Untuk URL eksternal, fetch terlebih dahulu
         const response = await fetch(imageUrl, { 
             method: 'GET', 
             mode: 'cors', 
@@ -36,7 +33,6 @@ async function downloadImage(imageUrl, filename = 'screenshot.png') {
         
         let blob = await response.blob();
         
-        // Handle jika response berupa JSON dengan URL gambar
         if (blob.type === 'application/json') { 
             const text = await blob.text(); 
             const json = JSON.parse(text); 
@@ -71,8 +67,6 @@ async function downloadImage(imageUrl, filename = 'screenshot.png') {
     } catch (error) {
         console.error('Download error:', error);
         if (window.showToast) window.showToast('❌ Gagal: ' + error.message, 'error');
-        
-        // Fallback: coba buka di tab baru
         try {
             window.open(imageUrl, '_blank');
             if (window.showToast) window.showToast('Gambar dibuka di tab baru, klik kanan untuk menyimpan', 'info');
@@ -83,7 +77,6 @@ async function downloadImage(imageUrl, filename = 'screenshot.png') {
     }
 }
 
-// ========== TOAST NOTIFICATION ==========
 function createToast(message, type = 'info') {
     const existing = document.querySelector('.toast-notification');
     if (existing) existing.remove();
@@ -101,61 +94,27 @@ function createToast(message, type = 'info') {
     }, 3000);
 }
 
-// ========== INJECT TOAST STYLES ==========
 if (!document.querySelector('#toast-styles')) {
     const style = document.createElement('style');
     style.id = 'toast-styles';
     style.textContent = `
         .toast-notification { 
-            position: fixed; 
-            bottom: 30px; 
-            left: 50%; 
-            transform: translateX(-50%) translateY(100px); 
-            background: rgba(0,0,0,0.95); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 50px; 
-            padding: 12px 24px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            color: white; 
-            font-size: 0.9rem; 
-            font-weight: 500; 
-            z-index: 10000; 
-            transition: transform 0.3s ease; 
-            overflow: hidden; 
-            max-width: 90%;
-            white-space: nowrap;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 50px; padding: 12px 24px; display: flex; align-items: center; gap: 12px; 
+            color: white; font-size: 0.9rem; font-weight: 500; z-index: 10000; transition: transform 0.3s ease; 
+            overflow: hidden; max-width: 90%; white-space: nowrap;
         } 
-        @media (max-width: 768px) {
-            .toast-notification { white-space: normal; max-width: 90%; text-align: center; }
-        }
+        @media (max-width: 768px) { .toast-notification { white-space: normal; max-width: 90%; text-align: center; } }
         .toast-notification.show { transform: translateX(-50%) translateY(0); } 
         .toast-notification i { font-size: 1.2rem; } 
-        .toast-success i { color: #10b981; } 
-        .toast-error i { color: #ef4444; } 
-        .toast-info i { color: #3b82f6; } 
-        .toast-progress { 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 3px; 
-            background: rgba(255,255,255,0.3); 
-            animation: toastProgress 3s linear forwards; 
-            transform-origin: left;
-        } 
-        @keyframes toastProgress { 
-            from { transform: scaleX(1); } 
-            to { transform: scaleX(0); } 
-        }
+        .toast-success i { color: #10b981; } .toast-error i { color: #ef4444; } .toast-info i { color: #3b82f6; } 
+        .toast-progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.3); animation: toastProgress 3s linear forwards; transform-origin: left; } 
+        @keyframes toastProgress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
     `;
     document.head.appendChild(style);
 }
 
-// Expose functions globally
 window.downloadImage = downloadImage;
 window.showToast = createToast;
-
 console.log('✅ download.js loaded');

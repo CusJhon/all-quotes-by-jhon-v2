@@ -22,8 +22,8 @@ const formatsV2 = [
     { id: 'gay', name: 'Gay Image', icon: 'fas fa-rainbow', endpoint: '/api/canvas/gay', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'nama', label: 'Nama', type: 'text' }, { name: 'avatar', label: 'URL Avatar', type: 'url' }, { name: 'num', label: 'Angka', type: 'text' }] },
     { id: 'profilecard', name: 'Profile Card', icon: 'fas fa-id-card', endpoint: '/api/canvas/profile', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'backgroundURL', label: 'URL Background', type: 'url' }, { name: 'avatarURL', label: 'URL Avatar', type: 'url' }, { name: 'rankName', label: 'Nama Rank', type: 'text' }, { name: 'rankId', label: 'ID Rank', type: 'text' }, { name: 'exp', label: 'EXP', type: 'text' }, { name: 'requireExp', label: 'EXP Required', type: 'text' }, { name: 'level', label: 'Level', type: 'text' }, { name: 'name', label: 'Nama', type: 'text' }] },
     { id: 'captcha', name: 'Captcha Image', icon: 'fas fa-shield-alt', endpoint: '/api/canvas/captcha', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'background', label: 'URL Background', type: 'url' }, { name: 'captchaKey', label: 'Kode Captcha', type: 'text' }, { name: 'border', label: 'Warna Border', type: 'text' }, { name: 'overlayOpacity', label: 'Opacity Overlay', type: 'text' }] },
-    { id: 'fakecomment', name: 'Fake xny67 Comment', icon: 'fas fa-comment-dots', endpoint: '/api/canvas/fake-xny67', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'name', label: 'Nama', type: 'text' }, { name: 'quote', label: 'Kutipan', type: 'textarea' }, { name: 'likes', label: 'Jumlah Like', type: 'text' }, { name: 'dislikes', label: 'Jumlah Dislike', type: 'text' }] },
-    { id: 'fakexn', name: 'Fake xny67', icon: 'fas fa-skull', endpoint: '/api/canvas/xny67', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'title', label: 'Judul', type: 'text' }, { name: 'image', label: 'URL Gambar', type: 'url' }] },
+    { id: 'fakecomment', name: 'Fake xnxx Comment', icon: 'fas fa-comment-dots', endpoint: '/api/canvas/fake-xnxx', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'name', label: 'Nama', type: 'text' }, { name: 'quote', label: 'Kutipan', type: 'textarea' }, { name: 'likes', label: 'Jumlah Like', type: 'text' }, { name: 'dislikes', label: 'Jumlah Dislike', type: 'text' }] },
+    { id: 'fakexn', name: 'Fake xnxx', icon: 'fas fa-skull', endpoint: '/api/canvas/xnxx', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'title', label: 'Judul', type: 'text' }, { name: 'image', label: 'URL Gambar', type: 'url' }] },
     { id: 'beautiful', name: 'Beautiful Image', icon: 'fas fa-star', endpoint: '/api/canvas/beautiful', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'image', label: 'URL Gambar', type: 'url' }] },
     { id: 'sertifikat', name: 'Sertifikat Tolol', icon: 'fas fa-scroll', endpoint: '/api/canvas/sertifikat-tolol', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'text', label: 'Teks', type: 'text' }] },
     { id: 'ektp', name: 'eKTP Generator', icon: 'fas fa-id-card', endpoint: '/api/canvas/ektp', baseUrl: 'https://api.siputzx.my.id', params: [{ name: 'provinsi', label: 'Provinsi', type: 'text' }, { name: 'kota', label: 'Kota', type: 'text' }, { name: 'nik', label: 'NIK', type: 'text' }, { name: 'nama', label: 'Nama', type: 'text' }, { name: 'ttl', label: 'Tempat/Tgl Lahir', type: 'text' }, { name: 'jenis_kelamin', label: 'Jenis Kelamin', type: 'text' }, { name: 'golongan_darah', label: 'Golongan Darah', type: 'text' }, { name: 'alamat', label: 'Alamat', type: 'textarea' }, { name: 'rt/rw', label: 'RT/RW', type: 'text' }, { name: 'kel/desa', label: 'Kelurahan/Desa', type: 'text' }, { name: 'kecamatan', label: 'Kecamatan', type: 'text' }, { name: 'agama', label: 'Agama', type: 'text' }, { name: 'status', label: 'Status Perkawinan', type: 'text' }, { name: 'pekerjaan', label: 'Pekerjaan', type: 'text' }, { name: 'kewarganegaraan', label: 'Kewarganegaraan', type: 'text' }, { name: 'masa_berlaku', label: 'Masa Berlaku', type: 'text' }, { name: 'terbuat', label: 'Tanggal Terbuat', type: 'text' }, { name: 'pas_photo', label: 'URL Pas Photo', type: 'url' }] },
@@ -463,83 +463,41 @@ function renderParamForm(prefix, activeFormat) {
         return; 
     }
     
-    // Buat form parameters
     let html = activeFormat.params.map(p => `<div class="input-group"><label>${p.label}</label>${p.type === 'textarea' ? `<textarea name="${p.name}" rows="3" placeholder="${p.placeholder || ''}"></textarea>` : `<input type="${p.type}" name="${p.name}" placeholder="${p.placeholder || ''}" />`}</div>`).join('');
     
-    // Tambahkan tips khusus untuk format tertentu
     if (activeFormat.id === 'quote') {
-        html += `
-            <div class="tips-form">
-                <i class="fas fa-lightbulb"></i> 
-                <strong>✨ Tips:</strong> 
-                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Ambil URL Background di Panduan lengkap</a>
-                <span style="color:#9ca3af;"> • Gunakan [kurung siku] untuk highlight teks</span>
-            </div>
-        `;
+        html += `<div class="tips-form"><i class="fas fa-lightbulb"></i> <strong>✨ Tips:</strong> <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Ambil URL Background di Panduan lengkap</a> <span style="color:#9ca3af;"> • Gunakan [kurung siku] untuk highlight teks</span></div>`;
     }
     
     if (activeFormat.id === 'textpro') {
-        html += `
-            <div class="tips-form">
-                <i class="fas fa-lightbulb"></i> 
-                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
-                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL TextPro</a>
-            </div>
-        `;
+        html += `<div class="tips-form"><i class="fas fa-lightbulb"></i> <strong>✨ Ambil URL di Panduan lengkap:</strong> <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL TextPro</a></div>`;
     }
     
     if (activeFormat.id === 'photooxy') {
-        html += `
-            <div class="tips-form">
-                <i class="fas fa-lightbulb"></i> 
-                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
-                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL PhotoOxy</a>
-            </div>
-        `;
+        html += `<div class="tips-form"><i class="fas fa-lightbulb"></i> <strong>✨ Ambil URL di Panduan lengkap:</strong> <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL PhotoOxy</a></div>`;
     }
     
     if (activeFormat.id === 'ephoto360') {
-        html += `
-            <div class="tips-form">
-                <i class="fas fa-lightbulb"></i> 
-                <strong>✨ Ambil URL di Panduan lengkap:</strong> 
-                <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL Ephoto360</a>
-            </div>
-        `;
+        html += `<div class="tips-form"><i class="fas fa-lightbulb"></i> <strong>✨ Ambil URL di Panduan lengkap:</strong> <a href="#" onclick="showGuidePage()" style="color:#3b82f6; text-decoration:none;">Klik di sini untuk melihat cara mendapatkan URL Ephoto360</a></div>`;
     }
     
-    // Tambahkan tips untuk format yang membutuhkan URL gambar
     const urlParams = ['image', 'avatar', 'background', 'bgUrl', 'avatar1', 'avatar2', 'image1', 'image2', 'url'];
     const hasUrlParam = activeFormat.params.some(p => urlParams.includes(p.name));
     if (hasUrlParam && activeFormat.id !== 'quote' && activeFormat.id !== 'textpro' && activeFormat.id !== 'photooxy' && activeFormat.id !== 'ephoto360') {
-        html += `
-            <div class="tips-form">
-                <i class="fas fa-lightbulb"></i> 
-                <strong>✨ Tips:</strong> 
-                <a href="#" onclick="showUploaderPage()" style="color:#3b82f6; text-decoration:none;">Upload gambar dulu di menu Uploader</a>
-                <span style="color:#9ca3af;"> untuk mendapatkan URL, lalu paste di sini</span>
-            </div>
-        `;
+        html += `<div class="tips-form"><i class="fas fa-lightbulb"></i> <strong>✨ Tips:</strong> <a href="#" onclick="showUploaderPage()" style="color:#3b82f6; text-decoration:none;">Upload gambar dulu di menu Uploader</a> <span style="color:#9ca3af;"> untuk mendapatkan URL, lalu paste di sini</span></div>`;
     }
     
     container.innerHTML = html;
 }
 
-// ========== FUNGSI NAVIGASI KE HALAMAN LAIN ==========
 function showGuidePage() {
-    // Cari dan klik link Guide di navbar
     const guideLink = document.querySelector('.nav-link[data-page="guide"]');
-    if (guideLink) {
-        guideLink.click();
-    }
+    if (guideLink) guideLink.click();
 }
 
 function showUploaderPage() {
-    // Cari dan klik link Uploader di navbar
     const uploaderLink = document.querySelector('.nav-link[data-page="uploader"]');
-    if (uploaderLink) {
-        uploaderLink.click();
-    }
+    if (uploaderLink) uploaderLink.click();
 }
 
 async function generateMockup(version) {
@@ -549,22 +507,12 @@ async function generateMockup(version) {
     const loadingObj = showGenerateLoading(version);
     
     try {
-        // Handle RANDOM IMAGE
         if (activeFormat.isRandom) {
             let imageUrl;
-            
-            if (activeFormat.isDirectImage) {
-                imageUrl = await fetchDirectImage(activeFormat);
-            }
-            else if (activeFormat.useWaifuPics) {
-                imageUrl = await fetchWaifuPics();
-            }
-            else if (activeFormat.useNekosBest) {
-                imageUrl = await fetchNekosBest();
-            }
-            else {
-                imageUrl = await fetchDirectImage(activeFormat);
-            }
+            if (activeFormat.isDirectImage) imageUrl = await fetchDirectImage(activeFormat);
+            else if (activeFormat.useWaifuPics) imageUrl = await fetchWaifuPics();
+            else if (activeFormat.useNekosBest) imageUrl = await fetchNekosBest();
+            else imageUrl = await fetchDirectImage(activeFormat);
             
             resultDiv.innerHTML = `<div class="result-content"><img src="${imageUrl}" alt="Random Image" style="max-width:100%; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,0.3);" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/3b82f6?text=Failed+to+load';"/><div style="margin-top:20px; text-align:center;"><button class="download-btn" id="downloadImageBtn${prefix}"><i class="fas fa-download"></i> Download Gambar</button></div></div>`;
             
@@ -583,7 +531,6 @@ async function generateMockup(version) {
             return;
         }
         
-        // Handle QUOTE/REMINDER CARD
         if (activeFormat.isQuoteCard || activeFormat.id === 'quote') {
             const textInput = document.querySelector(`#paramForm${prefix} textarea[name="text"], #paramForm${prefix} input[name="text"]`);
             const authorInput = document.querySelector(`#paramForm${prefix} input[name="author"]`);
@@ -595,9 +542,7 @@ async function generateMockup(version) {
             const bgUrl = bgUrlInput?.value || null;
             const fontUrl = fontUrlInput?.value || null;
             
-            if (!text || text.trim() === '') {
-                throw new Error('Teks quote tidak boleh kosong');
-            }
+            if (!text || text.trim() === '') throw new Error('Teks quote tidak boleh kosong');
             
             const imageUrl = await generateQuoteCard(text, author, bgUrl, fontUrl);
             
@@ -618,7 +563,6 @@ async function generateMockup(version) {
             return;
         }
         
-        // Handle REGULAR MOCKUP
         const inputs = document.querySelectorAll(`#paramForm${prefix} input, #paramForm${prefix} textarea`);
         let params = {};
         inputs.forEach(inp => { if (inp.value.trim()) params[inp.name] = encodeURIComponent(inp.value.trim()); });
@@ -687,13 +631,9 @@ async function generateMockup(version) {
     } catch (err) { 
         console.error('Generate error:', err);
         let errorMessage = err.message;
-        if (err.message.includes('503')) {
-            errorMessage = 'Server sedang sibuk. Silakan coba lagi dalam beberapa saat. (HTTP 503)';
-        } else if (err.message.includes('Failed to fetch')) {
-            errorMessage = 'Koneksi terputus. Periksa koneksi internet Anda.';
-        } else if (err.message.includes('NetworkError')) {
-            errorMessage = 'Gagal terhubung ke server. Coba lagi nanti.';
-        }
+        if (err.message.includes('503')) errorMessage = 'Server sedang sibuk. Silakan coba lagi dalam beberapa saat. (HTTP 503)';
+        else if (err.message.includes('Failed to fetch')) errorMessage = 'Koneksi terputus. Periksa koneksi internet Anda.';
+        else if (err.message.includes('NetworkError')) errorMessage = 'Gagal terhubung ke server. Coba lagi nanti.';
         resultDiv.innerHTML = `<div class="result-placeholder"><i class="fas fa-times-circle"></i><p>❌ Gagal: ${errorMessage}</p><p style="font-size:12px; margin-top:8px;">Tips: Coba lagi nanti atau pilih format lain</p></div>`; 
         hideGenerateLoading(loadingObj, false, version); 
         if (window.showToast) window.showToast(errorMessage, 'error'); 

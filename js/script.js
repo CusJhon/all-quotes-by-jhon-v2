@@ -266,8 +266,8 @@ async function generateQuoteCard(text, author, bgUrl = null, fontUrl = null) {
         throw new Error('Teks quote tidak boleh kosong');
     }
     
-    const backgroundUrl = bgUrl || 'https://raw.githubusercontent.com/Ditzzx-vibecoder/Assets/main/Image/_20260425155846190.jpeg';
-    const fontUrlToUse = fontUrl || 'https://raw.githubusercontent.com/Ditzzx-vibecoder/Assets/main/Font/CrimsonText-Regular.ttf';
+    const backgroundUrl = bgUrl || 'https://raw.githubusercontent.com/CusJhon/Asset-/542413b90c0f414672859cb0b461c5b7db0aac9f/Image/_20260425155846190.jpeg';
+    const fontUrlToUse = fontUrl || 'https://raw.githubusercontent.com/CusJhon/Asset-/542413b90c0f414672859cb0b461c5b7db0aac9f/Font/CrimsonText-Regular.ttf';
     
     const PADDING_RATIO = 0.15;
     const FOOTER_RATIO = 0.12;
